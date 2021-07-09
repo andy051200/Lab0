@@ -2669,30 +2669,7 @@ void main(void)
     setup();
     while(1)
     {
-        PORTAbits.RA0=1;
-        PORTAbits.RA1=0;
-        PORTAbits.RA2=0;
-        PORTAbits.RA3=0;
-        _delay((unsigned long)((1000)*(4000000/4000.0)));
 
-        PORTAbits.RA0=0;
-        PORTAbits.RA1=1;
-        PORTAbits.RA2=0;
-        PORTAbits.RA3=0;
-        _delay((unsigned long)((1000)*(4000000/4000.0)));
-
-        PORTAbits.RA0=0;
-        PORTAbits.RA1=0;
-        PORTAbits.RA2=1;
-        PORTAbits.RA3=0;
-        _delay((unsigned long)((1000)*(4000000/4000.0)));
-
-        PORTAbits.RA0=0;
-        PORTAbits.RA1=0;
-        PORTAbits.RA2=0;
-        PORTAbits.RA3=1;
-        _delay((unsigned long)((1000)*(4000000/4000.0)));
-# 115 "main_lab0.c"
     }
 }
 
@@ -2705,18 +2682,41 @@ void setup(void)
     ANSELH=0;
 
 
-    TRISAbits.TRISA0=0;
-    TRISAbits.TRISA1=0;
-    TRISAbits.TRISA2=0;
-    TRISAbits.TRISA3=0;
-    PORTAbits.RA0=0;
-    PORTAbits.RA1=0;
-    PORTAbits.RA2=0;
-    PORTAbits.RA3=0;
+    TRISA=0;
+    TRISBbits.TRISB0=1;
+    TRISBbits.TRISB1=1;
+    TRISBbits.TRISB2=1;
+    TRISC=0;
+    TRISD=0;
+
+    PORTA=0x00;
+    PORTB=0x00;
+    PORTC=0x00;
+    PORTD=0x00;
 
 
     OSCCONbits.IRCF = 0b110;
     OSCCONbits.SCS = 1;
+
+
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2=1;
+    OPTION_REGbits.PS1=1;
+    OPTION_REGbits.PS0=1;
+    TMR0 = 237;
+
+
+    INTCONbits.GIE=1;
+    INTCONbits.T0IE=1;
+    INTCONbits.TMR0IF=0;
+    INTCONbits.TMR0IE=1;
+    INTCONbits.RBIF=0;
+
+
+    IOCBbits.IOCB0=1;
+    IOCBbits.IOCB1=1;
+
 
     return;
 }

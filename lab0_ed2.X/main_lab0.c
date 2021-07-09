@@ -4,11 +4,11 @@ Microcontrolador: PIC16F887
 Autor: Andy Bonilla
 Compilador: pic-as (v2.30), MPLABX v5.45
     
-Programa: ganas de hacer el star tarcker pero mas automatizado
+Programa: juego de carreras 
 Hardware: PIC16F887, 
     
-Creado: 15 de junio de 2021    
-Descripcion: controlar un motor stepper para el star tracker
+Creado: 8 de julio de 2021    
+Descripcion: juego de carreras con dos botones como repaso
 ------------------------------------------------------------------------------*/
 
 // CONFIG1
@@ -66,52 +66,7 @@ void main(void)
     setup();
     while(1)
     {
-        PORTAbits.RA0=1;        //pulso para A0_0
-        PORTAbits.RA1=0;        //pulso para A1_1
-        PORTAbits.RA2=0;        //pulso para A2_2
-        PORTAbits.RA3=0;        //pulso para A3_3
-        __delay_ms(1000);
         
-        PORTAbits.RA0=0;        //pulso para A0_0
-        PORTAbits.RA1=1;        //pulso para A1_1
-        PORTAbits.RA2=0;        //pulso para A2_2
-        PORTAbits.RA3=0;        //pulso para A3_3
-        __delay_ms(1000);
-        
-        PORTAbits.RA0=0;        //pulso para A0_0
-        PORTAbits.RA1=0;        //pulso para A1_1
-        PORTAbits.RA2=1;        //pulso para A2_2
-        PORTAbits.RA3=0;        //pulso para A3_3
-        __delay_ms(1000);
-        
-        PORTAbits.RA0=0;        //pulso para A0_0
-        PORTAbits.RA1=0;        //pulso para A1_1
-        PORTAbits.RA2=0;        //pulso para A2_2
-        PORTAbits.RA3=1;        //pulso para A3_3
-        __delay_ms(1000);
-        
-        /*PORTAbits.RA0=0;        //pulso para A0_0
-        PORTAbits.RA1=0;        //pulso para A1_1
-        PORTAbits.RA2=1;        //pulso para A2_2
-        PORTAbits.RA3=0;        //pulso para A3_3
-        __delay_ms(1000);
-        
-        PORTAbits.RA0=0;        //pulso para A0_0
-        PORTAbits.RA1=1;        //pulso para A1_1
-        PORTAbits.RA2=0;        //pulso para A2_2
-        PORTAbits.RA3=0;        //pulso para A3_3
-        __delay_ms(100);*/
-        
-        
-       /* //antirrebote de botones
-        if (PORTBbits.RB0 ==0)
-        {
-            antirrebote1 = 1;
-        }
-        
-        if (PORTBbits.RB0 == 1 && antirrebote1 == 1)
-        {   
-        }      */
     }
 }
 /*-----------------------------------------------------------------------------
@@ -119,23 +74,46 @@ void main(void)
  -----------------------------------------------------------------------------*/
 void setup(void)
 {
-    //CONFIGURACION DE ENTRDAS Y SALIDAS
+    //CONFIGURACION DE ENTRDAS ANALOGICAS
     ANSEL=0;                //sin entradas analógicas
     ANSELH=0;               //sin entradas analogicas
     
-    //CONFIGURACION DE PUERTOS
-    TRISAbits.TRISA0=0;     //RA0 como salida
-    TRISAbits.TRISA1=0;     //RA1 como salida
-    TRISAbits.TRISA2=0;     //RA1 como salida
-    TRISAbits.TRISA3=0;     //RA3 como salida
-    PORTAbits.RA0=0;        //se limpia pin
-    PORTAbits.RA1=0;        //se limpia pin
-    PORTAbits.RA2=0;        //se limpia pin
-    PORTAbits.RA3=0;        //se limpia pin
+    //CONFIGURACION DE IN-OUT DE PUERTOS
+    TRISA=0;                //PortA como salida para displays 7seg
+    TRISBbits.TRISB0=1;     //RB0 como entrada para boton 1, inicio
+    TRISBbits.TRISB1=1;     //RB0 como entrada para boton 2, jugador 1
+    TRISBbits.TRISB2=1;     //RB0 como entrada para boton 3, jugador 2
+    TRISC=0;                //PortC como salida para leds jugador 1
+    TRISD=0;                //PortD como salida para leds jugador 2
     
+    PORTA=0x00;             //se limpia PortA
+    PORTB=0x00;             //se limpia PortB
+    PORTC=0x00;             //se limpia PortC
+    PORTD=0x00;             //se limpia PortD
+   
     //CONFIGURACION DE RELOJ
     OSCCONbits.IRCF = 0b110; //Fosc 4MHz
     OSCCONbits.SCS = 1;      //configuracion de reloj interno
+    
+    //CONFIGURACION DEL TIMER0
+    OPTION_REGbits.T0CS = 0;    //configuracion del reloj interno
+    OPTION_REGbits.PSA = 0;     //configuracion de preescaler
+    OPTION_REGbits.PS2=1;       //PS2 1, preescaler 111
+    OPTION_REGbits.PS1=1;       //PS1 1, preescaler 111
+    OPTION_REGbits.PS0=1;       //PS0 1, preescaler 111
+    TMR0 = 237;                 //valor inicial del timer0
+    
+    //CONFIGURACION DE INTERRUPCIONES
+    INTCONbits.GIE=1;           //se habilitan las interrupciones globales
+    INTCONbits.T0IE=1;          //enable bit de int timer0
+    INTCONbits.TMR0IF=0;        //se apaga la bandera de int timer0
+    INTCONbits.TMR0IE=1;        // enable bit de IntOnCHangePortB
+    INTCONbits.RBIF=0;          // se apaga la bandera de IntOnChangeB  
+    
+    //CONFIGURACION DE INT ON CHANGE PORTB
+    IOCBbits.IOCB0=1; //se abilita IntOnChangePortB, pin0
+    IOCBbits.IOCB1=1; //se abilita IntOnChangePortB, pin1
+    
     
     return;
 }

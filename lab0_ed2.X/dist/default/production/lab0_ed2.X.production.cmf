@@ -11,18 +11,18 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
+$C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
 $dist/default/production\lab0_ed2.X.production.o
 cinit CODE 0 F F 5 2
-text1 CODE 0 69 69 18 2
-text2 CODE 0 81 81 7 2
-maintext CODE 0 14 14 55 2
-cstackCOMMON COMMON 1 70 70 5 1
+text1 CODE 0 14 14 2C 2
+text2 CODE 0 49 49 7 2
+maintext CODE 0 40 40 9 2
+cstackCOMMON COMMON 1 70 70 2 1
 intentry CODE 0 4 4 8 2
-bssCOMMON COMMON 1 75 75 1 1
+bssCOMMON COMMON 1 72 72 1 1
 config CONFIG 4 2007 2007 2 2
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -39,23 +39,23 @@ BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
 CONST 3-3 2
-CONST 88-1FFF 2
+CONST 50-1FFF 2
 ENTRY 3-3 2
-ENTRY 88-1FFF 2
+ENTRY 50-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
 CODE 3-3 2
-CODE 88-1FFF 2
+CODE 50-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-10F 1
 SFR3 180-18F 1
-COMMON 76-7D 1
+COMMON 73-7D 1
 EEDATA 2100-21FF 2
 STRCODE 3-3 2
-STRCODE 88-1FFF 2
+STRCODE 50-1FFF 2
 STRING 3-3 2
-STRING 88-1FFF 2
+STRING 50-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -70,51 +70,48 @@ STRING 88-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\lab0_ed2.X.production.o
-F cinit CODE >437:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
-F cinit CODE >440:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
-F cinit CODE >451:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
-10 cinit CODE >457:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
-10 cinit CODE >459:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
-11 cinit CODE >460:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
+F cinit CODE >457:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
+F cinit CODE >460:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
+F cinit CODE >471:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
+10 cinit CODE >477:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
+10 cinit CODE >479:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
+11 cinit CODE >480:C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.s
 4 intentry CODE >57:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-81 text2 CODE >57:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-81 text2 CODE >59:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-69 text1 CODE >120:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-69 text1 CODE >123:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-6C text1 CODE >124:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-6D text1 CODE >127:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-70 text1 CODE >128:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-71 text1 CODE >129:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-72 text1 CODE >130:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-73 text1 CODE >131:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-76 text1 CODE >132:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-77 text1 CODE >133:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-78 text1 CODE >134:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-79 text1 CODE >137:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-7F text1 CODE >138:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-80 text1 CODE >141:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-14 maintext CODE >64:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-14 maintext CODE >66:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-19 maintext CODE >69:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-1C maintext CODE >70:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-1D maintext CODE >71:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-1E maintext CODE >72:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-1F maintext CODE >73:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-2C maintext CODE >75:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-2F maintext CODE >76:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-30 maintext CODE >77:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-31 maintext CODE >78:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-32 maintext CODE >79:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-3F maintext CODE >81:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-42 maintext CODE >82:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-43 maintext CODE >83:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-44 maintext CODE >84:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-45 maintext CODE >85:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-52 maintext CODE >87:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-55 maintext CODE >88:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-56 maintext CODE >89:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-57 maintext CODE >90:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
-58 maintext CODE >91:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+49 text2 CODE >57:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+49 text2 CODE >59:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+14 text1 CODE >75:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+14 text1 CODE >78:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+17 text1 CODE >79:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+18 text1 CODE >82:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+1B text1 CODE >83:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+1C text1 CODE >84:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+1D text1 CODE >85:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+1E text1 CODE >86:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+1F text1 CODE >87:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+20 text1 CODE >89:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+23 text1 CODE >90:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+24 text1 CODE >91:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+25 text1 CODE >92:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+26 text1 CODE >95:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+2C text1 CODE >96:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+2D text1 CODE >99:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+2E text1 CODE >100:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+2F text1 CODE >101:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+30 text1 CODE >102:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+31 text1 CODE >103:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+32 text1 CODE >104:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+36 text1 CODE >107:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+37 text1 CODE >108:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+38 text1 CODE >109:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+39 text1 CODE >110:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+3A text1 CODE >111:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+3B text1 CODE >114:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+3E text1 CODE >115:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+3F text1 CODE >119:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+40 maintext CODE >64:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+40 maintext CODE >66:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+45 maintext CODE >67:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
+45 maintext CODE >70:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab0\lab0_ed2.X\main_lab0.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -128,26 +125,28 @@ F cinit CODE >451:C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.s
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 ___latbits 2 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
-__Hspace_0 88 0 ABS 0 - -
-__Hspace_1 76 0 ABS 0 - -
+__Hspace_0 50 0 ABS 0 - -
+__Hspace_1 73 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-_main 28 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
+_TMR0 1 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+_main 80 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
-start 18 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
+start 18 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
 __size_of_main 0 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
+_OPTION_REGbits 81 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
@@ -155,12 +154,12 @@ __Hfunctab 0 0 ENTRY 0 functab -
 __Hclrtext 0 0 ABS 0 clrtext -
 _ANSELH 189 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
+___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\lab0_ed2.X.production.o
-_TRISAbits 85 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
+_TRISBbits 86 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -176,7 +175,7 @@ __Lbank2 0 0 ABS 0 bank2 -
 __Lbank3 0 0 ABS 0 bank3 -
 __Lcinit 1E 0 CODE 0 cinit -
 __Lstack 0 0 STACK 2 stack -
-_PORTAbits 5 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_INTCONbits B 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 __Habs1 0 0 ABS 0 abs1 -
 __Hcode 0 0 ABS 0 code -
 __Hinit 18 0 CODE 0 init -
@@ -194,16 +193,16 @@ __Lsfr2 0 0 ABS 0 sfr2 -
 __Lsfr3 0 0 ABS 0 sfr3 -
 __Ltext 0 0 ABS 0 text -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-__S0 88 0 ABS 0 - -
-__S1 76 0 ABS 0 - -
+__S0 50 0 ABS 0 - -
+__S1 73 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
-_isr 102 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
+_isr 92 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
-__end_of_isr 110 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
+__end_of_isr A0 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\s2c4.o
-__pmaintext 28 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\slp4.o
+__pmaintext 80 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
 __Lspace_0 0 0 ABS 0 - -
@@ -211,15 +210,15 @@ __Lspace_1 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
-__pbssCOMMON 75 0 COMMON 1 bssCOMMON dist/default/production\lab0_ed2.X.production.o
+__pbssCOMMON 72 0 COMMON 1 bssCOMMON dist/default/production\lab0_ed2.X.production.o
 __Lend_init 18 0 CODE 0 end_init -
 __LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
 end_of_initialization 20 0 CODE 0 cinit dist/default/production\lab0_ed2.X.production.o
 __Hintentry 18 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 6 0 CODE 0 reset_vec -
-__ptext1 D2 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
-__ptext2 102 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
+__ptext1 28 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
+__ptext2 92 0 CODE 0 text2 dist/default/production\lab0_ed2.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
@@ -228,13 +227,21 @@ __Lfunctab 0 0 ENTRY 0 functab -
 __Lclrtext 0 0 ABS 0 clrtext -
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/production\lab0_ed2.X.production.o
 __Hend_init 1E 0 CODE 0 end_init -
-__end_of_main D2 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
+__end_of_main 92 0 CODE 0 maintext dist/default/production\lab0_ed2.X.production.o
 _ANSEL 188 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
-__end_of_setup 102 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
+_PORTA 5 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_PORTB 6 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_PORTC 7 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_PORTD 8 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_TRISA 85 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_TRISC 87 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_TRISD 88 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+__end_of_setup 80 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
 interrupt_function 8 0 CODE 0 intentry dist/default/production\lab0_ed2.X.production.o
-_setup D2 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
+_IOCBbits 96 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
+_setup 28 0 CODE 0 text1 dist/default/production\lab0_ed2.X.production.o
 __pintentry 8 0 CODE 0 intentry dist/default/production\lab0_ed2.X.production.o
 __size_of_isr 0 0 ABS 0 - dist/default/production\lab0_ed2.X.production.o
 __initialization 1E 0 CODE 0 cinit dist/default/production\lab0_ed2.X.production.o
@@ -263,8 +270,8 @@ __initialization 1E 0 CODE 0 cinit dist/default/production\lab0_ed2.X.production
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-cstackCOMMON 1 70 70 6 1
-intentry 0 4 8 84 2
+cstackCOMMON 1 70 70 3 1
+intentry 0 4 8 4C 2
 reset_vec 0 0 0 3 2
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section
