@@ -2648,7 +2648,9 @@ typedef uint16_t uintptr_t;
 # 37 "main_lab0.c" 2
 # 47 "main_lab0.c"
 void setup(void);
-
+void semaforo_inicio(void);
+void p1_gana (void);
+void p2_gana (void);
 
 
 
@@ -2659,6 +2661,9 @@ char antirrebote1;
 
 void __attribute__((picinterrupt(("")))) isr(void)
 {
+   if (INTCONbits.T0IF)
+   {
+   }
 }
 
 
@@ -2688,6 +2693,7 @@ void setup(void)
     TRISBbits.TRISB2=1;
     TRISC=0;
     TRISD=0;
+    TRISE=0;
 
     PORTA=0x00;
     PORTB=0x00;
@@ -2707,6 +2713,12 @@ void setup(void)
     TMR0 = 237;
 
 
+    OPTION_REGbits.nRBPU = 0;
+    WPUBbits.WPUB0 = 1;
+    WPUBbits.WPUB1 = 1;
+    WPUBbits.WPUB2 = 1;
+
+
     INTCONbits.GIE=1;
     INTCONbits.T0IE=1;
     INTCONbits.TMR0IF=0;
@@ -2717,6 +2729,23 @@ void setup(void)
     IOCBbits.IOCB0=1;
     IOCBbits.IOCB1=1;
 
-
     return;
+}
+
+
+
+
+
+void semaforo_inicio()
+{
+}
+
+
+void p1_gana ()
+{
+}
+
+
+void p2_gana ()
+{
 }

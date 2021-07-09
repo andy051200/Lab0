@@ -45,7 +45,9 @@ Descripcion: juego de carreras con dos botones como repaso
  ------------------------ PROTOTIPOS DE FUNCIONES ------------------------------
  -----------------------------------------------------------------------------*/
 void setup(void);
-
+void semaforo_inicio(void);
+void p1_gana (void);
+void p2_gana (void);
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
@@ -56,6 +58,9 @@ char antirrebote1;
  -----------------------------------------------------------------------------*/
 void __interrupt() isr(void) //funcion de interrupciones
 {
+   if (INTCONbits.T0IF)
+   {
+   }
 }
 
 /*-----------------------------------------------------------------------------
@@ -85,6 +90,7 @@ void setup(void)
     TRISBbits.TRISB2=1;     //RB0 como entrada para boton 3, jugador 2
     TRISC=0;                //PortC como salida para leds jugador 1
     TRISD=0;                //PortD como salida para leds jugador 2
+    TRISE=0;                //PortE como salida para leds semaforo de inicio
     
     PORTA=0x00;             //se limpia PortA
     PORTB=0x00;             //se limpia PortB
@@ -103,6 +109,12 @@ void setup(void)
     OPTION_REGbits.PS0=1;       //PS0 1, preescaler 111
     TMR0 = 237;                 //valor inicial del timer0
     
+    //WEAK PULL UPs PORTB
+    OPTION_REGbits.nRBPU = 0;   // enable Individual pull-ups
+    WPUBbits.WPUB0 = 1;         // enable Pull-Up de RB0 
+    WPUBbits.WPUB1 = 1;         // enable Pull-Up de RB1 
+    WPUBbits.WPUB2 = 1;         // enable Pull-Up de RB2 
+    
     //CONFIGURACION DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilitan las interrupciones globales
     INTCONbits.T0IE=1;          //enable bit de int timer0
@@ -114,11 +126,23 @@ void setup(void)
     IOCBbits.IOCB0=1; //se abilita IntOnChangePortB, pin0
     IOCBbits.IOCB1=1; //se abilita IntOnChangePortB, pin1
     
-    
     return;
 }
 
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
+//funcion para indicador de semaforo de inicio
+void semaforo_inicio()
+{
+}
 
+//funcion para desplegar ganador p1 en 7seg
+void p1_gana ()
+{
+}
+
+//funcion para desplegar ganador p2 en 7seg
+void p2_gana ()
+{
+}
