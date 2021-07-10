@@ -1,4 +1,4 @@
-# 1 "main_lab0.c"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\pic\\__eeprom.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,30 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main_lab0.c" 2
-# 15 "main_lab0.c"
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
-
-
-
-
-
-
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\pic\\__eeprom.c" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2510,572 +2487,176 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 36 "main_lab0.c" 2
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\pic\\__eeprom.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
 
 
 
-
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 37 "main_lab0.c" 2
-# 47 "main_lab0.c"
-void setup(void);
-void semaforo_inicio(void);
-void semaforo_apagado(void);
-void cuenta_p1(void);
-void cuenta_p2(void);
-void p1_gana (void);
-void p2_gana (void);
-
-
-
-
-unsigned char antirrebote1;
-unsigned char antirrebote2;
-unsigned char antirrebote3;
-unsigned char jugador1=0;
-unsigned char jugador2=0;
-
-
-
-
-void __attribute__((picinterrupt(("")))) isr(void)
+void
+__eecpymem(volatile unsigned char *to, __eeprom unsigned char * from, unsigned char size)
 {
+ volatile unsigned char *cp = to;
 
-    if (T0IF)
-    {
-    }
+ while (EECON1bits.WR) continue;
+ EEADR = (unsigned char)from;
+ while(size--) {
+  while (EECON1bits.WR) continue;
 
+  EECON1 &= 0x7F;
 
-    if (PIR1bits.TMR1IF)
-    {
-    }
+  EECON1bits.RD = 1;
+  *cp++ = EEDATA;
+  ++EEADR;
+ }
+# 36 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\pic\\__eeprom.c"
 }
 
-
-
-
-void main(void)
+void
+__memcpyee(__eeprom unsigned char * to, const unsigned char *from, unsigned char size)
 {
-    setup();
-    while(1)
-    {
+ const unsigned char *ptr =from;
 
+ while (EECON1bits.WR) continue;
+ EEADR = (unsigned char)to - 1U;
 
-        if (PORTBbits.RB0 ==0)
-        {
-            antirrebote1 = 1;
-        }
+ EECON1 &= 0x7F;
 
-        if (PORTBbits.RB0 == 1 && antirrebote1 == 1)
-        {
-
-            semaforo_inicio();
-
-        }
-        else
-        {
-            semaforo_apagado();
-        }
-
-
-
-        if (PORTBbits.RB1 ==0)
-        {
-            antirrebote2 = 1;
-        }
-
-        if (PORTBbits.RB1 == 1 && antirrebote2 == 1)
-        {
-
-            jugador1++;
-            cuenta_p1();
-        }
-
-
-
-        if (PORTBbits.RB2 ==0)
-        {
-            antirrebote3 = 1;
-        }
-
-        if (PORTBbits.RB2 == 1 && antirrebote3 == 1)
-        {
-
-            jugador2++;
-            cuenta_p2();
-        }
-
-
-    }
+ while(size--) {
+  while (EECON1bits.WR) {
+   continue;
+  }
+  EEDATA = *ptr++;
+  ++EEADR;
+  STATUSbits.CARRY = 0;
+  if (INTCONbits.GIE) {
+   STATUSbits.CARRY = 1;
+  }
+  INTCONbits.GIE = 0;
+  EECON1bits.WREN = 1;
+  EECON2 = 0x55;
+  EECON2 = 0xAA;
+  EECON1bits.WR = 1;
+  EECON1bits.WREN = 0;
+  if (STATUSbits.CARRY) {
+   INTCONbits.GIE = 1;
+  }
+ }
+# 101 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\pic\\__eeprom.c"
 }
 
-
-
-void setup(void)
+unsigned char
+__eetoc(__eeprom void *addr)
 {
-
-    ANSEL=0;
-    ANSELH=0;
-
-
-    TRISA=0;
-    TRISBbits.TRISB0=1;
-    TRISBbits.TRISB1=1;
-    TRISBbits.TRISB2=1;
-    TRISC=0;
-    TRISD=0;
-    TRISE=0;
-
-    PORTA=0;
-    PORTB=0;
-    PORTC=0;
-    PORTD=0;
-    PORTE=0;
-
-
-    OSCCONbits.IRCF = 0b110;
-    OSCCONbits.SCS = 1;
-
-
-    OPTION_REGbits.T0CS = 0;
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS2=1;
-    OPTION_REGbits.PS1=1;
-    OPTION_REGbits.PS0=1;
-    TMR0 = 237;
-
-
-    OPTION_REGbits.nRBPU = 0;
-    WPUBbits.WPUB0 = 1;
-    WPUBbits.WPUB1 = 1;
-    WPUBbits.WPUB2 = 1;
-
-
-    T1CONbits.T1CKPS1 = 1;
-    T1CONbits.T1CKPS0 = 1;
-    T1CONbits.T1OSCEN = 1;
-    T1CONbits.T1SYNC = 1;
-    T1CONbits.TMR1CS = 0;
-    T1CONbits.TMR1ON = 1;
-    TMR1H = 10;
-    TMR1L = 105;
-
-
-    INTCONbits.GIE=1;
-    INTCONbits.T0IE=1;
-    INTCONbits.TMR0IF=0;
-    INTCONbits.TMR0IE=1;
-    INTCONbits.RBIF=0;
-    PIE1bits.TMR1IE=1;
-    PIR1bits.TMR1IF=0;
-    return;
+ unsigned char data;
+ __eecpymem((unsigned char *) &data,addr,1);
+ return data;
 }
 
-
-
-
-
-void semaforo_inicio()
+unsigned int
+__eetoi(__eeprom void *addr)
 {
-    for (int semaforo=1; semaforo<6;semaforo++)
-    {
-        switch(semaforo)
-        {
-            case(1):
-                PORTEbits.RE0=0;
-                PORTEbits.RE1=0;
-                PORTEbits.RE2=0;
-                _delay((unsigned long)((500)*(4000000/4000.0)));
-                break;
-
-            case(2):
-                PORTEbits.RE0=1;
-                PORTEbits.RE1=0;
-                PORTEbits.RE2=0;
-                _delay((unsigned long)((500)*(4000000/4000.0)));
-                break;
-
-            case(3):
-                PORTEbits.RE0=1;
-                PORTEbits.RE1=1;
-                PORTEbits.RE2=0;
-                _delay((unsigned long)((500)*(4000000/4000.0)));
-                break;
-
-            case(4):
-                PORTEbits.RE0=1;
-                PORTEbits.RE1=1;
-                PORTEbits.RE2=1;
-                _delay((unsigned long)((500)*(4000000/4000.0)));
-                break;
-
-            case(5):
-                PORTEbits.RE0=0;
-                PORTEbits.RE1=0;
-                PORTEbits.RE2=0;
-                _delay((unsigned long)((500)*(4000000/4000.0)));
-                break;
-        }
-    }
+ unsigned int data;
+ __eecpymem((unsigned char *) &data,addr,2);
+ return data;
 }
 
-
-void semaforo_apagado()
+#pragma warning push
+#pragma warning disable 2040
+__uint24
+__eetom(__eeprom void *addr)
 {
-    PORTEbits.RE0=0;
-    PORTEbits.RE1=0;
-    PORTEbits.RE2=0;
+ __uint24 data;
+ __eecpymem((unsigned char *) &data,addr,3);
+ return data;
+}
+#pragma warning pop
+
+unsigned long
+__eetol(__eeprom void *addr)
+{
+ unsigned long data;
+ __eecpymem((unsigned char *) &data,addr,4);
+ return data;
 }
 
-
-void cuenta_p1()
+#pragma warning push
+#pragma warning disable 1516
+unsigned long long
+__eetoo(__eeprom void *addr)
 {
-    switch(jugador1)
-    {
-        case(1):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=0;
-            PORTCbits.RC2=0;
-            PORTCbits.RC3=0;
-            PORTCbits.RC4=0;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
+ unsigned long long data;
+ __eecpymem((unsigned char *) &data,addr,8);
+ return data;
+}
+#pragma warning pop
 
-        case(2):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=0;
-            PORTCbits.RC3=0;
-            PORTCbits.RC4=0;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-
-        case(3):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=0;
-            PORTCbits.RC4=0;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-
-        case(4):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=1;
-            PORTCbits.RC4=0;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-
-        case(5):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=1;
-            PORTCbits.RC4=1;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-
-        case(6):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=1;
-            PORTCbits.RC4=1;
-            PORTCbits.RC5=1;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-
-        case(7):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=1;
-            PORTCbits.RC4=1;
-            PORTCbits.RC5=1;
-            PORTCbits.RC6=1;
-            PORTCbits.RC7=0;
-            break;
-
-        case(8):
-            PORTCbits.RC0=1;
-            PORTCbits.RC1=1;
-            PORTCbits.RC2=1;
-            PORTCbits.RC3=1;
-            PORTCbits.RC4=1;
-            PORTCbits.RC5=1;
-            PORTCbits.RC6=1;
-            PORTCbits.RC7=1;
-            break;
-
-        case(9):
-            jugador1=0;
-            PORTCbits.RC0=0;
-            PORTCbits.RC1=0;
-            PORTCbits.RC2=0;
-            PORTCbits.RC3=0;
-            PORTCbits.RC4=0;
-            PORTCbits.RC5=0;
-            PORTCbits.RC6=0;
-            PORTCbits.RC7=0;
-            break;
-    }
+unsigned char
+__ctoee(__eeprom void *addr, unsigned char data)
+{
+ __memcpyee(addr,(unsigned char *) &data,1);
+ return data;
 }
 
-
-void cuenta_p2()
+unsigned int
+__itoee(__eeprom void *addr, unsigned int data)
 {
-    switch(jugador2)
-    {
-        case(1):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=0;
-            PORTDbits.RD2=0;
-            PORTDbits.RD3=0;
-            PORTDbits.RD4=0;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(2):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=0;
-            PORTDbits.RD3=0;
-            PORTDbits.RD4=0;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(3):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=0;
-            PORTDbits.RD4=0;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(4):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=1;
-            PORTDbits.RD4=0;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(5):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=1;
-            PORTDbits.RD4=1;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(6):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=1;
-            PORTDbits.RD4=1;
-            PORTDbits.RD5=1;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-
-        case(7):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=1;
-            PORTDbits.RD4=1;
-            PORTDbits.RD5=1;
-            PORTDbits.RD6=1;
-            PORTDbits.RD7=0;
-            break;
-
-        case(8):
-            PORTDbits.RD0=1;
-            PORTDbits.RD1=1;
-            PORTDbits.RD2=1;
-            PORTDbits.RD3=1;
-            PORTDbits.RD4=1;
-            PORTDbits.RD5=1;
-            PORTDbits.RD6=1;
-            PORTDbits.RD7=1;
-            break;
-
-        case(9):
-            jugador2=0;
-            PORTDbits.RD0=0;
-            PORTDbits.RD1=0;
-            PORTDbits.RD2=0;
-            PORTDbits.RD3=0;
-            PORTDbits.RD4=0;
-            PORTDbits.RD5=0;
-            PORTDbits.RD6=0;
-            PORTDbits.RD7=0;
-            break;
-    }
+ __memcpyee(addr,(unsigned char *) &data,2);
+ return data;
 }
 
-
-void p1_gana ()
+#pragma warning push
+#pragma warning disable 2040
+__uint24
+__mtoee(__eeprom void *addr, __uint24 data)
 {
+ __memcpyee(addr,(unsigned char *) &data,3);
+ return data;
+}
+#pragma warning pop
+
+unsigned long
+__ltoee(__eeprom void *addr, unsigned long data)
+{
+ __memcpyee(addr,(unsigned char *) &data,4);
+ return data;
 }
 
-
-void p2_gana ()
+#pragma warning push
+#pragma warning disable 1516
+unsigned long long
+__otoee(__eeprom void *addr, unsigned long long data)
 {
+ __memcpyee(addr,(unsigned char *) &data,8);
+ return data;
+}
+#pragma warning pop
+
+float
+__eetoft(__eeprom void *addr)
+{
+ float data;
+ __eecpymem((unsigned char *) &data,addr,3);
+ return data;
+}
+
+double
+__eetofl(__eeprom void *addr)
+{
+ double data;
+ __eecpymem((unsigned char *) &data,addr,4);
+ return data;
+}
+
+float
+__fttoee(__eeprom void *addr, float data)
+{
+ __memcpyee(addr,(unsigned char *) &data,3);
+ return data;
+}
+
+double
+__fltoee(__eeprom void *addr, double data)
+{
+ __memcpyee(addr,(unsigned char *) &data,4);
+ return data;
 }
