@@ -2648,7 +2648,22 @@ typedef uint16_t uintptr_t;
 # 37 "wenas_prueba_lab0.c" 2
 # 47 "wenas_prueba_lab0.c"
 void setup(void);
-# 56 "wenas_prueba_lab0.c"
+void semaforo_inicio(void);
+void semaforo_apagado(void);
+void cuenta_p1(void);
+void cuenta_p2(void);
+
+
+
+unsigned char antirrebote1;
+unsigned char antirrebote2;
+unsigned char antirrebote3;
+unsigned char jugador1;
+unsigned char jugador2;
+
+
+
+
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
@@ -2662,10 +2677,147 @@ void main(void)
     setup();
     while(1)
     {
-        PORTA=0xff;
-        _delay((unsigned long)((500)*(4000000/4000.0)));
-        PORTA=0x00;
-        _delay((unsigned long)((500)*(4000000/4000.0)));
+
+        if (PORTBbits.RB0 ==0)
+        {
+            antirrebote1 = 1;
+        }
+
+        if (PORTBbits.RB0 == 1 && antirrebote1 == 1)
+        {
+            semaforo_inicio();
+        }
+        else
+        {
+            antirrebote1=0;
+            semaforo_apagado();
+        }
+
+
+        if (PORTBbits.RB1 ==0)
+        {
+            antirrebote2 = 1;
+        }
+
+        if (PORTBbits.RB1 == 1 && antirrebote2 == 1)
+        {
+            jugador1++;
+            switch(jugador1)
+            {
+                case(1):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=0;
+                    PORTCbits.RC2=0;
+                    PORTCbits.RC3=0;
+                    PORTCbits.RC4=0;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(2):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=0;
+                    PORTCbits.RC3=0;
+                    PORTCbits.RC4=0;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(3):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=0;
+                    PORTCbits.RC4=0;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(4):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=1;
+                    PORTCbits.RC4=0;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(5):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=1;
+                    PORTCbits.RC4=1;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(6):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=1;
+                    PORTCbits.RC4=1;
+                    PORTCbits.RC5=1;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(7):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=1;
+                    PORTCbits.RC4=1;
+                    PORTCbits.RC5=1;
+                    PORTCbits.RC6=1;
+                    PORTCbits.RC7=0;
+                    break;
+
+                case(8):
+                    PORTCbits.RC0=1;
+                    PORTCbits.RC1=1;
+                    PORTCbits.RC2=1;
+                    PORTCbits.RC3=1;
+                    PORTCbits.RC4=1;
+                    PORTCbits.RC5=1;
+                    PORTCbits.RC6=1;
+                    PORTCbits.RC7=1;
+                    break;
+
+                case(9):
+                    jugador1=0;
+                    PORTCbits.RC0=0;
+                    PORTCbits.RC1=0;
+                    PORTCbits.RC2=0;
+                    PORTCbits.RC3=0;
+                    PORTCbits.RC4=0;
+                    PORTCbits.RC5=0;
+                    PORTCbits.RC6=0;
+                    PORTCbits.RC7=0;
+                    break;
+            }
+        }
+        else
+        {
+            antirrebote2 = 0;
+            PORTCbits.RC0=0;
+            PORTCbits.RC1=0;
+            PORTCbits.RC2=0;
+            PORTCbits.RC3=0;
+            PORTCbits.RC4=0;
+            PORTCbits.RC5=0;
+            PORTCbits.RC6=0;
+            PORTCbits.RC7=0;
+        }
+
     }
 }
 
@@ -2679,8 +2831,18 @@ void setup(void)
 
 
     TRISA=0;
+    TRISBbits.TRISB0=1;
+    TRISBbits.TRISB1=1;
+    TRISBbits.TRISB2=1;
+    TRISC=0;
+    TRISD=0;
+    TRISE=0;
 
     PORTA=0;
+    PORTB=0;
+    PORTC=0;
+    PORTD=0;
+    PORTE=0;
 
 
     OSCCONbits.IRCF = 0b110;
@@ -2702,4 +2864,178 @@ void setup(void)
     PIR1bits.TMR1IF=0;
 
     return;
+}
+
+
+
+
+
+void semaforo_inicio()
+{
+    for (int semaforo=1; semaforo<6;semaforo++)
+    {
+        switch(semaforo)
+        {
+            case(1):
+                PORTEbits.RE0=0;
+                PORTEbits.RE1=0;
+                PORTEbits.RE2=0;
+                _delay((unsigned long)((500)*(4000000/4000.0)));
+                break;
+
+            case(2):
+                PORTEbits.RE0=1;
+                PORTEbits.RE1=0;
+                PORTEbits.RE2=0;
+                _delay((unsigned long)((500)*(4000000/4000.0)));
+                break;
+
+            case(3):
+                PORTEbits.RE0=1;
+                PORTEbits.RE1=1;
+                PORTEbits.RE2=0;
+                _delay((unsigned long)((500)*(4000000/4000.0)));
+                break;
+
+            case(4):
+                PORTEbits.RE0=1;
+                PORTEbits.RE1=1;
+                PORTEbits.RE2=1;
+                _delay((unsigned long)((500)*(4000000/4000.0)));
+                break;
+
+            case(5):
+                PORTEbits.RE0=0;
+                PORTEbits.RE1=0;
+                PORTEbits.RE2=0;
+                _delay((unsigned long)((500)*(4000000/4000.0)));
+                break;
+        }
+    }
+}
+
+
+void semaforo_apagado()
+{
+    PORTEbits.RE0=0;
+    PORTEbits.RE1=0;
+    PORTEbits.RE2=0;
+}
+
+
+
+
+void cuenta_p2()
+{
+    switch(jugador2)
+    {
+        case(1):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=0;
+            PORTDbits.RD2=0;
+            PORTDbits.RD3=0;
+            PORTDbits.RD4=0;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(2):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=0;
+            PORTDbits.RD3=0;
+            PORTDbits.RD4=0;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(3):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=0;
+            PORTDbits.RD4=0;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(4):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=1;
+            PORTDbits.RD4=0;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(5):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=1;
+            PORTDbits.RD4=1;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(6):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=1;
+            PORTDbits.RD4=1;
+            PORTDbits.RD5=1;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(7):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=1;
+            PORTDbits.RD4=1;
+            PORTDbits.RD5=1;
+            PORTDbits.RD6=1;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(8):
+            PORTDbits.RD0=1;
+            PORTDbits.RD1=1;
+            PORTDbits.RD2=1;
+            PORTDbits.RD3=1;
+            PORTDbits.RD4=1;
+            PORTDbits.RD5=1;
+            PORTDbits.RD6=1;
+            PORTDbits.RD7=1;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+
+        case(9):
+            jugador2=0;
+            PORTDbits.RD0=0;
+            PORTDbits.RD1=0;
+            PORTDbits.RD2=0;
+            PORTDbits.RD3=0;
+            PORTDbits.RD4=0;
+            PORTDbits.RD5=0;
+            PORTDbits.RD6=0;
+            PORTDbits.RD7=0;
+            _delay((unsigned long)((500)*(4000000/4000.0)));
+            break;
+    }
 }
