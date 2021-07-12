@@ -49,33 +49,19 @@ void semaforo_inicio(void);
 void semaforo_apagado(void);
 void cuenta_p1(void);
 void cuenta_p2(void);
-void p1_gana (void);
-void p2_gana (void);
 
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
-unsigned char antirrebote1; //variable de control para antirrebote 1
-unsigned char antirrebote2; //variable de control para antirrebote 2
-unsigned char antirrebote3; //variable de control para antirrebote 3
-unsigned char jugador1=0;     //variable de control para jugador1
-unsigned char jugador2=0;     //variable de control para jugador2
+unsigned char antirrebote1;
+unsigned char antirrebote2;
+unsigned char antirrebote3;
+unsigned char jugador1;
+unsigned char jugador2;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
-void __interrupt() isr(void) //funcion de interrupciones
-{
-    //interrupciones del timer0
-    if (T0IF)
-    {
-    }
-    
-    //interrupciones del timer1
-    if (PIR1bits.TMR1IF)
-    {
-    }
-}
 
 /*-----------------------------------------------------------------------------
  ----------------------------- MAIN LOOP --------------------------------------
@@ -85,53 +71,64 @@ void main(void)
     setup();
     while(1)
     {
-        //--------------PARTE PARA BOTON DE INICIO DE JUEGO
-        //antirrebota para boton 1, inicio de juego 
+        //antirrebote de control para semafor inicial
         if (PORTBbits.RB0 ==0)
         {
-            antirrebote1 = 1;
+            semaforo_inicio();
+            while(PORTBbits.RB0)
+            {
+                if (PORTBbits.RB1 ==0)
+                {
+                    antirrebote1=1;
+                }
+                
+                if (PORTBbits.RB1 ==0 && antirrebote1==1 )
+                {   
+                    __delay_ms(500);
+                    jugador1++;
+                }
+                
+                
+                if (PORTBbits.RB2 ==0)
+                {
+                    __delay_ms(500);
+                    antirrebote2=1;
+                }
+                    
+                if (PORTBbits.RB2 ==0 && antirrebote2==1 )
+                {
+                    
+                    jugador2++;
+                }
+                cuenta_p1();
+                cuenta_p2();
+                
+                if (jugador1==17 && jugador2 <17)
+                {
+                    //funcion que gana p1
+                    PORTE=0x0f;
+                }
+                else if (jugador1<17 && jugador2 ==17)
+                {
+                    //
+                    PORTE=0xf0;
+                }
+                else
+                {
+                    PORTE=0x00;
+                }
+                
+            }
         }
         
-        if (PORTBbits.RB0 == 1 && antirrebote1 == 1)
-        {  
-            
-            semaforo_inicio();      //se llama funcion para semaforo inicial
-       
-        }
         else
         {
-            semaforo_apagado();     //se llama funcion para semaforo apagado
+            antirrebote1=0;
+            semaforo_apagado();
         }
-        
-        //--------------PARTE PARA BOTON DE JUGADOR 1
-        //antirrebota para boton 2, jugador 1
-        if (PORTBbits.RB1 ==0)
-        {
-            antirrebote2 = 1;
-        }
-        
-        if (PORTBbits.RB1 == 1 && antirrebote2 == 1)
-        {
-            //PORTC++;
-            jugador1++;
-            cuenta_p1();
-        }
-        
-        //--------------PARTE PARA BOTON DE JUGADOR 2
-        //antirrebota para boton 3, jugador 2
-        if (PORTBbits.RB2 ==0)
-        {
-            antirrebote3 = 1;
-        }
-        
-        if (PORTBbits.RB2 == 1 && antirrebote3 == 1)
-        {
-            //PORTD++;
-            jugador2++;
-            cuenta_p2();
-        }
-        
-        //--------------PARTE PARA MULTIPLEXADA DE DISPLAYS
+        antirrebote1=0;
+        antirrebote2=0;
+        //PORTA=0b11011010; //2 para 7segmentos
     }
 }
 /*-----------------------------------------------------------------------------
@@ -145,62 +142,47 @@ void setup(void)
     
     //CONFIGURACION DE IN-OUT DE PUERTOS
     TRISA=0;                //PortA como salida para displays 7seg
-    TRISBbits.TRISB0=1;     //RB0 como entrada para boton 1, inicio
-    TRISBbits.TRISB1=1;     //RB0 como entrada para boton 2, jugador 1
-    TRISBbits.TRISB2=1;     //RB0 como entrada para boton 3, jugador 2
-    TRISC=0;                //PortC como salida para leds jugador 1
-    TRISD=0;                //PortD como salida para leds jugador 2
-    TRISE=0;                //PortE como salida para leds semaforo de inicio
+    TRISBbits.TRISB0=1;                //PortB como entrada
+    TRISBbits.TRISB1=1;                //PortB como entrada
+    TRISBbits.TRISB2=1;                //PortB como entrada
+    TRISC=0;                //PortC como salida
+    TRISD=0;                //PortD como salida
+    TRISE=0;                //PortE como salida
     
     PORTA=0;             //se limpia PortA
-    PORTB=0;             //se limpia PortB
-    PORTC=0;             //se limpia PortC
-    PORTD=0;             //se limpia PortD
-    PORTE=0;             //se limpia PortE*/
-   
+    PORTB=0;             //se limpia PortA
+    PORTC=0;             //se limpia PortE
+    PORTD=0;             //se limpia PortE
+    PORTE=0;             //se limpia PortE
+    
     //CONFIGURACION DE RELOJ
     OSCCONbits.IRCF = 0b110; //Fosc 4MHz
     OSCCONbits.SCS = 1;      //configuracion de reloj interno
-    
-    //CONFIGURACION DEL TIMER0
-    OPTION_REGbits.T0CS = 0;    //configuracion del reloj interno
-    OPTION_REGbits.PSA = 0;     //configuracion de preescaler
-    OPTION_REGbits.PS2=1;       //PS2 1, preescaler 111
-    OPTION_REGbits.PS1=1;       //PS1 1, preescaler 111
-    OPTION_REGbits.PS0=1;       //PS0 1, preescaler 111
-    TMR0 = 237;                 //valor inicial del timer0
     
     //WEAK PULL UPs PORTB
     OPTION_REGbits.nRBPU = 0;   // enable Individual pull-ups
     WPUBbits.WPUB0 = 1;         // enable Pull-Up de RB0 
     WPUBbits.WPUB1 = 1;         // enable Pull-Up de RB1 
     WPUBbits.WPUB2 = 1;         // enable Pull-Up de RB2 
-    
-    //CONFIGURACION DEL TIMER1
-    T1CONbits.T1CKPS1 = 1;          // preescaler 11, 1:8
-    T1CONbits.T1CKPS0 = 1;          // preescaler 11, 1:8
-    T1CONbits.T1OSCEN = 1;          // Timer1 Oscillator Enable 
-    T1CONbits.T1SYNC = 1;           // External Clock Input Synchronization
-    T1CONbits.TMR1CS = 0;           // Clock Source Select bit, Internal (FOSC/4)
-    T1CONbits.TMR1ON = 1;           // bit 0 enables timer
-    TMR1H = 10;                 // preset for timer1 MSB register
-    TMR1L = 105;                // preset for timer1 LSB register
+
     
     //CONFIGURACION DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilitan las interrupciones globales
     INTCONbits.T0IE=1;          //enable bit de int timer0
     INTCONbits.TMR0IF=0;        //se apaga la bandera de int timer0
     INTCONbits.TMR0IE=1;        // enable bit de IntOnCHangePortB
+    INTCONbits.RBIE=1;          // se habilita IntOnChange
     INTCONbits.RBIF=0;          // se apaga la bandera de IntOnChangeB  
     PIE1bits.TMR1IE=1;          // se enciende enable de Int Timer1
     PIR1bits.TMR1IF=0;          //se apaga bandera Timer1
+
     return;
 }
 
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
-//funcion para indicador de semaforo de inicio
+//funcion para luces de inicio de juego
 void semaforo_inicio()
 {
     for (int semaforo=1; semaforo<6;semaforo++)
@@ -243,17 +225,19 @@ void semaforo_inicio()
                 break;
         }
     }
+    return;
 }
 
-//funcion mientras no se precione el boton 1
+//funcion mientras no se apache
 void semaforo_apagado()
 {
     PORTEbits.RE0=0;        //RE0 apagado
     PORTEbits.RE1=0;        //RE1 apagado
     PORTEbits.RE2=0;        //RE2 apagado
+    return;
 }
 
-//funcion para llevar el contador de decada del jugador 1
+//funcion para contador jugador 1
 void cuenta_p1()
 {
     switch(jugador1)
@@ -280,7 +264,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(3):
+        case(4):
             PORTCbits.RC0=1;
             PORTCbits.RC1=1;
             PORTCbits.RC2=1;
@@ -291,7 +275,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(4):
+        case(6):
             PORTCbits.RC0=1;
             PORTCbits.RC1=1;
             PORTCbits.RC2=1;
@@ -302,7 +286,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(5):
+        case(8):
             PORTCbits.RC0=1;
             PORTCbits.RC1=1;
             PORTCbits.RC2=1;
@@ -313,7 +297,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(6):
+        case(10):
             PORTCbits.RC0=1; 
             PORTCbits.RC1=1;
             PORTCbits.RC2=1; 
@@ -324,7 +308,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(7):
+        case(12):
             PORTCbits.RC0=1;
             PORTCbits.RC1=1;
             PORTCbits.RC2=1;
@@ -335,7 +319,7 @@ void cuenta_p1()
             PORTCbits.RC7=0;
             break;
                     
-        case(8):
+        case(14):
             PORTCbits.RC0=1;
             PORTCbits.RC1=1;
             PORTCbits.RC2=1;
@@ -346,7 +330,7 @@ void cuenta_p1()
             PORTCbits.RC7=1;
             break;
                     
-        case(9):
+        case(16):
             jugador1=0;
             PORTCbits.RC0=0;
             PORTCbits.RC1=0;
@@ -356,11 +340,18 @@ void cuenta_p1()
             PORTCbits.RC5=0;
             PORTCbits.RC6=0;
             PORTCbits.RC7=0;
+            PORTA=0b00001100; //1 para 7segmentos
+            break;
+        case(18):
+            //PORTA=0b00001100; //1 para 7segmentos
+            jugador1=0;
             break;
     }
+    
+    return;
 }
 
-//funcion para llevar el contador de decada del jugador 1
+//funcion para contador jugador 2
 void cuenta_p2()
 {
     switch(jugador2)
@@ -375,7 +366,6 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
         case(2):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
@@ -386,8 +376,7 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
-        case(3):
+        case(4):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -397,8 +386,7 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
-        case(4):
+        case(6):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -408,8 +396,7 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
-        case(5):
+        case(8):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -419,8 +406,7 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
-        case(6):
+        case(10):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -430,8 +416,7 @@ void cuenta_p2()
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
             break;
-                    
-        case(7):
+        case(12):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -441,8 +426,7 @@ void cuenta_p2()
             PORTDbits.RD6=1;
             PORTDbits.RD7=0;
             break;
-                    
-        case(8):
+        case(14):
             PORTDbits.RD0=1;
             PORTDbits.RD1=1;
             PORTDbits.RD2=1;
@@ -452,9 +436,7 @@ void cuenta_p2()
             PORTDbits.RD6=1;
             PORTDbits.RD7=1;
             break;
-                    
-        case(9):
-            jugador2=0;
+        case(16):
             PORTDbits.RD0=0;
             PORTDbits.RD1=0;
             PORTDbits.RD2=0;
@@ -463,16 +445,11 @@ void cuenta_p2()
             PORTDbits.RD5=0;
             PORTDbits.RD6=0;
             PORTDbits.RD7=0;
-            break;   
+            PORTA=0b11011010; //2 para 7segmentos
+            break;
+        case(18):
+            //PORTA=0b11011010; //2 para 7segmentos
+            jugador2=0;
+            break;
     }
-}
-
-//funcion para desplegar ganador p1 en 7seg
-void p1_gana ()
-{
-}
-
-//funcion para desplegar ganador p2 en 7seg
-void p2_gana ()
-{
 }

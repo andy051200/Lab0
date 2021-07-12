@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Sat Jul 10 01:03:59 2021
+                                                                                               Mon Jul 12 17:51:27 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -15,7 +15,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
      9                           	psect	text2,local,class=CODE,merge=1,delta=2
     10                           	psect	text3,local,class=CODE,merge=1,delta=2
     11                           	psect	text4,local,class=CODE,merge=1,delta=2
-    12                           	psect	intentry,global,class=CODE,delta=2
+    12                           	psect	text5,local,class=CODE,merge=1,delta=2
     13                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
     14                           	dabs	1,0x7E,2
     15  0000                     
@@ -218,15 +218,15 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    204  018C                     	;# 
    205  018D                     	;# 
    206  0008                     _PORTDbits	set	8
-   207  0009                     _PORTEbits	set	9
-   208  000C                     _PIR1bits	set	12
-   209  000B                     _INTCONbits	set	11
-   210  0009                     _PORTE	set	9
+   207  0007                     _PORTCbits	set	7
+   208  0009                     _PORTEbits	set	9
+   209  000C                     _PIR1bits	set	12
+   210  000B                     _INTCONbits	set	11
    211  0008                     _PORTD	set	8
    212  0007                     _PORTC	set	7
    213  0006                     _PORTB	set	6
    214  0005                     _PORTA	set	5
-   215  0007                     _PORTCbits	set	7
+   215  0009                     _PORTE	set	9
    216  0006                     _PORTBbits	set	6
    217  008C                     _PIE1bits	set	140
    218  0095                     _WPUBbits	set	149
@@ -241,1119 +241,1663 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    227  0188                     _ANSEL	set	392
    228                           
    229                           	psect	cinit
-   230  000F                     start_initialization:	
+   230  07F7                     start_initialization:	
    231                           ; #config settings
    232                           
-   233  000F                     __initialization:
+   233  07F7                     __initialization:
    234                           
    235                           ; Clear objects allocated to COMMON
-   236  000F  01F9               	clrf	__pbssCOMMON& (0+127)
-   237  0010  01FA               	clrf	(__pbssCOMMON+1)& (0+127)
-   238  0011  01FB               	clrf	(__pbssCOMMON+2)& (0+127)
-   239  0012  01FC               	clrf	(__pbssCOMMON+3)& (0+127)
-   240  0013  01FD               	clrf	(__pbssCOMMON+4)& (0+127)
-   241  0014                     end_of_initialization:	
+   236  07F7  01F8               	clrf	__pbssCOMMON& (0+127)
+   237  07F8  01F9               	clrf	(__pbssCOMMON+1)& (0+127)
+   238  07F9  01FA               	clrf	(__pbssCOMMON+2)& (0+127)
+   239  07FA  01FB               	clrf	(__pbssCOMMON+3)& (0+127)
+   240  07FB  01FC               	clrf	(__pbssCOMMON+4)& (0+127)
+   241  07FC                     end_of_initialization:	
    242                           ;End of C runtime variable initialization code
    243                           
-   244  0014                     __end_of__initialization:
-   245  0014  0183               	clrf	3
-   246  0015  120A  118A  2818   	ljmp	_main	;jump to C main() function
+   244  07FC                     __end_of__initialization:
+   245  07FC  0183               	clrf	3
+   246  07FD  120A  118A  2F60   	ljmp	_main	;jump to C main() function
    247                           
    248                           	psect	bssCOMMON
-   249  0079                     __pbssCOMMON:
-   250  0079                     _jugador2:
-   251  0079                     	ds	1
-   252  007A                     _jugador1:
-   253  007A                     	ds	1
-   254  007B                     _antirrebote3:
-   255  007B                     	ds	1
-   256  007C                     _antirrebote2:
-   257  007C                     	ds	1
-   258  007D                     _antirrebote1:
-   259  007D                     	ds	1
+   249  0078                     __pbssCOMMON:
+   250  0078                     _jugador2:
+   251  0078                     	ds	1
+   252  0079                     _jugador1:
+   253  0079                     	ds	1
+   254  007A                     _antirrebote3:
+   255  007A                     	ds	1
+   256  007B                     _antirrebote2:
+   257  007B                     	ds	1
+   258  007C                     _antirrebote1:
+   259  007C                     	ds	1
    260                           
    261                           	psect	cstackCOMMON
    262  0070                     __pcstackCOMMON:
    263  0070                     ?_setup:
-   264  0070                     ?_semaforo_inicio:	
+   264  0070                     ??_setup:	
    265                           ; 1 bytes @ 0x0
    266                           
-   267  0070                     ?_semaforo_apagado:	
+   267  0070                     ?_semaforo_inicio:	
    268                           ; 1 bytes @ 0x0
    269                           
-   270  0070                     ?_isr:	
+   270  0070                     ??_semaforo_inicio:	
    271                           ; 1 bytes @ 0x0
    272                           
-   273  0070                     ??_isr:	
+   273  0070                     ?_cuenta_p1:	
    274                           ; 1 bytes @ 0x0
    275                           
-   276  0070                     ?_main:	
+   276  0070                     ??_cuenta_p1:	
    277                           ; 1 bytes @ 0x0
    278                           
-   279                           
+   279  0070                     ?_cuenta_p2:	
    280                           ; 1 bytes @ 0x0
-   281  0070                     	ds	2
-   282  0072                     ??_setup:
-   283  0072                     ??_semaforo_inicio:	
-   284                           ; 1 bytes @ 0x2
-   285                           
-   286  0072                     ??_semaforo_apagado:	
-   287                           ; 1 bytes @ 0x2
-   288                           
-   289                           
-   290                           ; 1 bytes @ 0x2
-   291  0072                     	ds	3
-   292  0075                     semaforo_inicio@semaforo:
+   281                           
+   282  0070                     ??_cuenta_p2:	
+   283                           ; 1 bytes @ 0x0
+   284                           
+   285  0070                     ?_semaforo_apagado:	
+   286                           ; 1 bytes @ 0x0
+   287                           
+   288  0070                     ??_semaforo_apagado:	
+   289                           ; 1 bytes @ 0x0
+   290                           
+   291  0070                     ?_main:	
+   292                           ; 1 bytes @ 0x0
    293                           
-   294                           ; 2 bytes @ 0x5
-   295  0075                     	ds	2
-   296  0077                     ??_main:
-   297                           
-   298                           ; 1 bytes @ 0x7
-   299  0077                     	ds	2
-   300                           
-   301                           	psect	maintext
-   302  0018                     __pmaintext:	
-   303 ;;
-   304 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
-   305 ;;
-   306 ;; *************** function _main *****************
-   307 ;; Defined at:
-   308 ;;		line 72 in file "wenas_prueba_lab0.c"
-   309 ;; Parameters:    Size  Location     Type
-   310 ;;		None
-   311 ;; Auto vars:     Size  Location     Type
-   312 ;;		None
-   313 ;; Return value:  Size  Location     Type
-   314 ;;                  1    wreg      void 
-   315 ;; Registers used:
-   316 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
-   317 ;; Tracked objects:
-   318 ;;		On entry : B00/0
-   319 ;;		On exit  : 0/0
-   320 ;;		Unchanged: 0/0
-   321 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   322 ;;      Params:         0       0       0       0       0
-   323 ;;      Locals:         0       0       0       0       0
-   324 ;;      Temps:          2       0       0       0       0
-   325 ;;      Totals:         2       0       0       0       0
-   326 ;;Total ram usage:        2 bytes
-   327 ;; Hardware stack levels required when called:    2
-   328 ;; This function calls:
-   329 ;;		_semaforo_apagado
-   330 ;;		_semaforo_inicio
-   331 ;;		_setup
-   332 ;; This function is called by:
-   333 ;;		Startup code after reset
-   334 ;; This function uses a non-reentrant model
-   335 ;;
-   336                           
-   337                           
-   338                           ;psect for function _main
-   339  0018                     _main:
-   340  0018                     l782:	
-   341                           ;incstack = 0
-   342                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   294                           
+   295                           ; 1 bytes @ 0x0
+   296  0070                     	ds	3
+   297  0073                     semaforo_inicio@semaforo:
+   298                           
+   299                           ; 2 bytes @ 0x3
+   300  0073                     	ds	2
+   301  0075                     ??_main:
+   302                           
+   303                           ; 1 bytes @ 0x5
+   304  0075                     	ds	3
+   305                           
+   306                           	psect	maintext
+   307  0760                     __pmaintext:	
+   308 ;;
+   309 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   310 ;;
+   311 ;; *************** function _main *****************
+   312 ;; Defined at:
+   313 ;;		line 69 in file "wenas_prueba_lab0.c"
+   314 ;; Parameters:    Size  Location     Type
+   315 ;;		None
+   316 ;; Auto vars:     Size  Location     Type
+   317 ;;		None
+   318 ;; Return value:  Size  Location     Type
+   319 ;;                  1    wreg      void 
+   320 ;; Registers used:
+   321 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   322 ;; Tracked objects:
+   323 ;;		On entry : B00/0
+   324 ;;		On exit  : 0/0
+   325 ;;		Unchanged: 0/0
+   326 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   327 ;;      Params:         0       0       0       0       0
+   328 ;;      Locals:         0       0       0       0       0
+   329 ;;      Temps:          3       0       0       0       0
+   330 ;;      Totals:         3       0       0       0       0
+   331 ;;Total ram usage:        3 bytes
+   332 ;; Hardware stack levels required when called:    1
+   333 ;; This function calls:
+   334 ;;		_cuenta_p1
+   335 ;;		_cuenta_p2
+   336 ;;		_semaforo_apagado
+   337 ;;		_semaforo_inicio
+   338 ;;		_setup
+   339 ;; This function is called by:
+   340 ;;		Startup code after reset
+   341 ;; This function uses a non-reentrant model
+   342 ;;
    343                           
    344                           
-   345                           ;wenas_prueba_lab0.c: 74:     setup();
-   346  0018  120A  118A  212E  120A  118A  	fcall	_setup
-   347  001D                     l784:
-   348                           
-   349                           ;wenas_prueba_lab0.c: 76:     {;wenas_prueba_lab0.c: 78:         if (PORTBbits.RB0 ==0)
-   350  001D  1283               	bcf	3,5	;RP0=0, select bank0
-   351  001E  1303               	bcf	3,6	;RP1=0, select bank0
-   352  001F  1806               	btfsc	6,0	;volatile
-   353  0020  2822               	goto	u21
-   354  0021  2823               	goto	u20
-   355  0022                     u21:
-   356  0022  2825               	goto	l73
-   357  0023                     u20:
-   358  0023                     l786:
-   359                           
-   360                           ;wenas_prueba_lab0.c: 79:         {;wenas_prueba_lab0.c: 80:             antirrebote1 = 
-      +                          1;
-   361  0023  01FD               	clrf	_antirrebote1
-   362  0024  0AFD               	incf	_antirrebote1,f
-   363  0025                     l73:	
-   364                           ;wenas_prueba_lab0.c: 81:         }
-   365                           
+   345                           ;psect for function _main
+   346  0760                     _main:
+   347  0760                     l841:	
+   348                           ;incstack = 0
+   349                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   350                           
+   351                           
+   352                           ;wenas_prueba_lab0.c: 71:     setup();
+   353  0760  120A  118A  25B9  120A  118A  	fcall	_setup
+   354  0765                     l843:
+   355                           
+   356                           ;wenas_prueba_lab0.c: 73:     {;wenas_prueba_lab0.c: 75:         if (PORTBbits.RB0 ==0)
+   357  0765  1283               	bcf	3,5	;RP0=0, select bank0
+   358  0766  1303               	bcf	3,6	;RP1=0, select bank0
+   359  0767  1806               	btfsc	6,0	;volatile
+   360  0768  2F6A               	goto	u21
+   361  0769  2F6B               	goto	u20
+   362  076A                     u21:
+   363  076A  2FEB               	goto	l885
+   364  076B                     u20:
+   365  076B                     l845:
    366                           
-   367                           ;wenas_prueba_lab0.c: 83:         if (PORTBbits.RB0 == 1 && antirrebote1 == 1)
-   368  0025  1C06               	btfss	6,0	;volatile
-   369  0026  2828               	goto	u31
-   370  0027  2829               	goto	u30
-   371  0028                     u31:
-   372  0028  2834               	goto	l792
-   373  0029                     u30:
-   374  0029                     l788:
-   375  0029  037D               	decf	_antirrebote1,w
-   376  002A  1D03               	btfss	3,2
-   377  002B  282D               	goto	u41
-   378  002C  282E               	goto	u40
-   379  002D                     u41:
-   380  002D  2834               	goto	l792
-   381  002E                     u40:
-   382  002E                     l790:
-   383                           
-   384                           ;wenas_prueba_lab0.c: 84:         {;wenas_prueba_lab0.c: 85:             semaforo_inicio
+   367                           ;wenas_prueba_lab0.c: 76:         {;wenas_prueba_lab0.c: 77:             semaforo_inicio
       +                          ();
-   385  002E  120A  118A  20D4  120A  118A  	fcall	_semaforo_inicio
-   386                           
-   387                           ;wenas_prueba_lab0.c: 86:         }
-   388  0033  283A               	goto	l796
-   389  0034                     l792:
-   390                           
-   391                           ;wenas_prueba_lab0.c: 88:         {;wenas_prueba_lab0.c: 89:             antirrebote1=0;
-   392  0034  01FD               	clrf	_antirrebote1
-   393  0035                     l794:
-   394                           
-   395                           ;wenas_prueba_lab0.c: 90:             semaforo_apagado();
-   396  0035  120A  118A  215E  120A  118A  	fcall	_semaforo_apagado
-   397  003A                     l796:
-   398                           
-   399                           ;wenas_prueba_lab0.c: 94:         if (PORTBbits.RB1 ==0)
-   400  003A  1283               	bcf	3,5	;RP0=0, select bank0
-   401  003B  1303               	bcf	3,6	;RP1=0, select bank0
-   402  003C  1886               	btfsc	6,1	;volatile
-   403  003D  283F               	goto	u51
-   404  003E  2840               	goto	u50
-   405  003F                     u51:
-   406  003F  2842               	goto	l76
-   407  0040                     u50:
-   408  0040                     l798:
-   409                           
-   410                           ;wenas_prueba_lab0.c: 95:         {;wenas_prueba_lab0.c: 96:             antirrebote2 = 
-      +                          1;
-   411  0040  01FC               	clrf	_antirrebote2
-   412  0041  0AFC               	incf	_antirrebote2,f
-   413  0042                     l76:	
-   414                           ;wenas_prueba_lab0.c: 97:         }
-   415                           
-   416                           
-   417                           ;wenas_prueba_lab0.c: 99:         if (PORTBbits.RB1 == 1 && antirrebote2 == 1)
-   418  0042  1C86               	btfss	6,1	;volatile
-   419  0043  2845               	goto	u61
-   420  0044  2846               	goto	u60
-   421  0045                     u61:
-   422  0045  28C7               	goto	l826
-   423  0046                     u60:
-   424  0046                     l800:
-   425  0046  037C               	decf	_antirrebote2,w
-   426  0047  1D03               	btfss	3,2
-   427  0048  284A               	goto	u71
-   428  0049  284B               	goto	u70
-   429  004A                     u71:
-   430  004A  28C7               	goto	l826
-   431  004B                     u70:
-   432  004B                     l802:
-   433                           
-   434                           ;wenas_prueba_lab0.c: 100:         {;wenas_prueba_lab0.c: 101:             jugador1++;
-   435  004B  3001               	movlw	1
-   436  004C  00F7               	movwf	??_main
-   437  004D  0877               	movf	??_main,w
-   438  004E  07FA               	addwf	_jugador1,f
-   439                           
-   440                           ;wenas_prueba_lab0.c: 102:             switch(jugador1)
-   441  004F  28A2               	goto	l824
-   442  0050                     l79:	
-   443                           ;wenas_prueba_lab0.c: 103:             {;wenas_prueba_lab0.c: 104:                 case(
-      +                          1):
-   444                           
-   445                           
-   446                           ;wenas_prueba_lab0.c: 105:                     PORTCbits.RC0=1;
-   447  0050  1407               	bsf	7,0	;volatile
-   448                           
-   449                           ;wenas_prueba_lab0.c: 106:                     PORTCbits.RC1=0;
-   450  0051  1087               	bcf	7,1	;volatile
-   451                           
-   452                           ;wenas_prueba_lab0.c: 107:                     PORTCbits.RC2=0;
-   453  0052  1107               	bcf	7,2	;volatile
-   454                           
-   455                           ;wenas_prueba_lab0.c: 108:                     PORTCbits.RC3=0;
-   456  0053  1187               	bcf	7,3	;volatile
-   457                           
-   458                           ;wenas_prueba_lab0.c: 109:                     PORTCbits.RC4=0;
-   459  0054  1207               	bcf	7,4	;volatile
-   460                           
-   461                           ;wenas_prueba_lab0.c: 110:                     PORTCbits.RC5=0;
-   462  0055  1287               	bcf	7,5	;volatile
+   368  076B  120A  118A  25E3  120A  118A  	fcall	_semaforo_inicio
+   369                           
+   370                           ;wenas_prueba_lab0.c: 78:             while(PORTBbits.RB0)
+   371  0770  2FE4               	goto	l883
+   372  0771                     l74:
+   373                           
+   374                           ;wenas_prueba_lab0.c: 79:             {;wenas_prueba_lab0.c: 80:                 if (POR
+      +                          TBbits.RB1 ==0)
+   375  0771  1886               	btfsc	6,1	;volatile
+   376  0772  2F74               	goto	u31
+   377  0773  2F75               	goto	u30
+   378  0774                     u31:
+   379  0774  2F77               	goto	l75
+   380  0775                     u30:
+   381  0775                     l847:
+   382                           
+   383                           ;wenas_prueba_lab0.c: 81:                 {;wenas_prueba_lab0.c: 82:                    
+      +                           antirrebote1=1;
+   384  0775  01FC               	clrf	_antirrebote1
+   385  0776  0AFC               	incf	_antirrebote1,f
+   386  0777                     l75:	
+   387                           ;wenas_prueba_lab0.c: 83:                 }
+   388                           
+   389                           
+   390                           ;wenas_prueba_lab0.c: 85:                 if (PORTBbits.RB1 ==0 && antirrebote1==1 )
+   391  0777  1886               	btfsc	6,1	;volatile
+   392  0778  2F7A               	goto	u41
+   393  0779  2F7B               	goto	u40
+   394  077A                     u41:
+   395  077A  2F91               	goto	l855
+   396  077B                     u40:
+   397  077B                     l849:
+   398  077B  037C               	decf	_antirrebote1,w
+   399  077C  1D03               	btfss	3,2
+   400  077D  2F7F               	goto	u51
+   401  077E  2F80               	goto	u50
+   402  077F                     u51:
+   403  077F  2F91               	goto	l855
+   404  0780                     u50:
+   405  0780                     l851:
+   406                           
+   407                           ;wenas_prueba_lab0.c: 86:                 {;wenas_prueba_lab0.c: 87:                    
+      +                           _delay((unsigned long)((500)*(4000000/4000.0)));
+   408  0780  3003               	movlw	3
+   409  0781  00F7               	movwf	??_main+2
+   410  0782  308A               	movlw	138
+   411  0783  00F6               	movwf	??_main+1
+   412  0784  3055               	movlw	85
+   413  0785  00F5               	movwf	??_main
+   414  0786                     u147:
+   415  0786  0BF5               	decfsz	??_main,f
+   416  0787  2F86               	goto	u147
+   417  0788  0BF6               	decfsz	??_main+1,f
+   418  0789  2F86               	goto	u147
+   419  078A  0BF7               	decfsz	??_main+2,f
+   420  078B  2F86               	goto	u147
+   421  078C  2F8D               	nop2
+   422  078D                     l853:
+   423                           
+   424                           ;wenas_prueba_lab0.c: 88:                     jugador1++;
+   425  078D  3001               	movlw	1
+   426  078E  00F5               	movwf	??_main
+   427  078F  0875               	movf	??_main,w
+   428  0790  07F9               	addwf	_jugador1,f
+   429  0791                     l855:
+   430                           
+   431                           ;wenas_prueba_lab0.c: 92:                 if (PORTBbits.RB2 ==0)
+   432  0791  1283               	bcf	3,5	;RP0=0, select bank0
+   433  0792  1303               	bcf	3,6	;RP1=0, select bank0
+   434  0793  1906               	btfsc	6,2	;volatile
+   435  0794  2F96               	goto	u61
+   436  0795  2F97               	goto	u60
+   437  0796                     u61:
+   438  0796  2FA6               	goto	l861
+   439  0797                     u60:
+   440  0797                     l857:
+   441                           
+   442                           ;wenas_prueba_lab0.c: 93:                 {;wenas_prueba_lab0.c: 94:                    
+      +                           _delay((unsigned long)((500)*(4000000/4000.0)));
+   443  0797  3003               	movlw	3
+   444  0798  00F7               	movwf	??_main+2
+   445  0799  308A               	movlw	138
+   446  079A  00F6               	movwf	??_main+1
+   447  079B  3055               	movlw	85
+   448  079C  00F5               	movwf	??_main
+   449  079D                     u157:
+   450  079D  0BF5               	decfsz	??_main,f
+   451  079E  2F9D               	goto	u157
+   452  079F  0BF6               	decfsz	??_main+1,f
+   453  07A0  2F9D               	goto	u157
+   454  07A1  0BF7               	decfsz	??_main+2,f
+   455  07A2  2F9D               	goto	u157
+   456  07A3  2FA4               	nop2
+   457  07A4                     l859:
+   458                           
+   459                           ;wenas_prueba_lab0.c: 95:                     antirrebote2=1;
+   460  07A4  01FB               	clrf	_antirrebote2
+   461  07A5  0AFB               	incf	_antirrebote2,f
+   462  07A6                     l861:
    463                           
-   464                           ;wenas_prueba_lab0.c: 111:                     PORTCbits.RC6=0;
-   465  0056  1307               	bcf	7,6	;volatile
-   466                           
-   467                           ;wenas_prueba_lab0.c: 112:                     PORTCbits.RC7=0;
-   468  0057  1387               	bcf	7,7	;volatile
-   469                           
-   470                           ;wenas_prueba_lab0.c: 113:                     break;
-   471  0058  281D               	goto	l784
-   472  0059                     l81:	
-   473                           ;wenas_prueba_lab0.c: 115:                 case(2):
-   474                           
-   475                           
-   476                           ;wenas_prueba_lab0.c: 116:                     PORTCbits.RC0=1;
-   477  0059  1407               	bsf	7,0	;volatile
-   478                           
-   479                           ;wenas_prueba_lab0.c: 117:                     PORTCbits.RC1=1;
-   480  005A  1487               	bsf	7,1	;volatile
-   481                           
-   482                           ;wenas_prueba_lab0.c: 118:                     PORTCbits.RC2=0;
-   483  005B  1107               	bcf	7,2	;volatile
-   484                           
-   485                           ;wenas_prueba_lab0.c: 119:                     PORTCbits.RC3=0;
-   486  005C  1187               	bcf	7,3	;volatile
-   487                           
-   488                           ;wenas_prueba_lab0.c: 120:                     PORTCbits.RC4=0;
-   489  005D  1207               	bcf	7,4	;volatile
-   490                           
-   491                           ;wenas_prueba_lab0.c: 121:                     PORTCbits.RC5=0;
-   492  005E  1287               	bcf	7,5	;volatile
+   464                           ;wenas_prueba_lab0.c: 98:                 if (PORTBbits.RB2 ==0 && antirrebote2==1 )
+   465  07A6  1283               	bcf	3,5	;RP0=0, select bank0
+   466  07A7  1303               	bcf	3,6	;RP1=0, select bank0
+   467  07A8  1906               	btfsc	6,2	;volatile
+   468  07A9  2FAB               	goto	u71
+   469  07AA  2FAC               	goto	u70
+   470  07AB                     u71:
+   471  07AB  2FB5               	goto	l867
+   472  07AC                     u70:
+   473  07AC                     l863:
+   474  07AC  037B               	decf	_antirrebote2,w
+   475  07AD  1D03               	btfss	3,2
+   476  07AE  2FB0               	goto	u81
+   477  07AF  2FB1               	goto	u80
+   478  07B0                     u81:
+   479  07B0  2FB5               	goto	l867
+   480  07B1                     u80:
+   481  07B1                     l865:
+   482                           
+   483                           ;wenas_prueba_lab0.c: 99:                 {;wenas_prueba_lab0.c: 101:                   
+      +                            jugador2++;
+   484  07B1  3001               	movlw	1
+   485  07B2  00F5               	movwf	??_main
+   486  07B3  0875               	movf	??_main,w
+   487  07B4  07F8               	addwf	_jugador2,f
+   488  07B5                     l867:
+   489                           
+   490                           ;wenas_prueba_lab0.c: 103:                 cuenta_p1();
+   491  07B5  120A  118A  26CE  120A  118A  	fcall	_cuenta_p1
+   492  07BA                     l869:
    493                           
-   494                           ;wenas_prueba_lab0.c: 122:                     PORTCbits.RC6=0;
-   495  005F  1307               	bcf	7,6	;volatile
+   494                           ;wenas_prueba_lab0.c: 104:                 cuenta_p2();
+   495  07BA  120A  118A  263D  120A  118A  	fcall	_cuenta_p2
    496                           
-   497                           ;wenas_prueba_lab0.c: 123:                     PORTCbits.RC7=0;
-   498  0060  1387               	bcf	7,7	;volatile
-   499                           
-   500                           ;wenas_prueba_lab0.c: 124:                     break;
-   501  0061  281D               	goto	l784
-   502  0062                     l82:	
-   503                           ;wenas_prueba_lab0.c: 126:                 case(3):
-   504                           
-   505                           
-   506                           ;wenas_prueba_lab0.c: 127:                     PORTCbits.RC0=1;
-   507  0062  1407               	bsf	7,0	;volatile
-   508                           
-   509                           ;wenas_prueba_lab0.c: 128:                     PORTCbits.RC1=1;
-   510  0063  1487               	bsf	7,1	;volatile
-   511                           
-   512                           ;wenas_prueba_lab0.c: 129:                     PORTCbits.RC2=1;
-   513  0064  1507               	bsf	7,2	;volatile
-   514                           
-   515                           ;wenas_prueba_lab0.c: 130:                     PORTCbits.RC3=0;
-   516  0065  1187               	bcf	7,3	;volatile
-   517                           
-   518                           ;wenas_prueba_lab0.c: 131:                     PORTCbits.RC4=0;
-   519  0066  1207               	bcf	7,4	;volatile
-   520                           
-   521                           ;wenas_prueba_lab0.c: 132:                     PORTCbits.RC5=0;
-   522  0067  1287               	bcf	7,5	;volatile
-   523                           
-   524                           ;wenas_prueba_lab0.c: 133:                     PORTCbits.RC6=0;
-   525  0068  1307               	bcf	7,6	;volatile
-   526                           
-   527                           ;wenas_prueba_lab0.c: 134:                     PORTCbits.RC7=0;
-   528  0069  1387               	bcf	7,7	;volatile
-   529                           
-   530                           ;wenas_prueba_lab0.c: 135:                     break;
-   531  006A  281D               	goto	l784
-   532  006B                     l83:	
-   533                           ;wenas_prueba_lab0.c: 137:                 case(4):
-   534                           
-   535                           
-   536                           ;wenas_prueba_lab0.c: 138:                     PORTCbits.RC0=1;
-   537  006B  1407               	bsf	7,0	;volatile
-   538                           
-   539                           ;wenas_prueba_lab0.c: 139:                     PORTCbits.RC1=1;
-   540  006C  1487               	bsf	7,1	;volatile
-   541                           
-   542                           ;wenas_prueba_lab0.c: 140:                     PORTCbits.RC2=1;
-   543  006D  1507               	bsf	7,2	;volatile
+   497                           ;wenas_prueba_lab0.c: 106:                 if (jugador1==17 && jugador2 <17)
+   498  07BF  3011               	movlw	17
+   499  07C0  0679               	xorwf	_jugador1,w
+   500  07C1  1D03               	btfss	3,2
+   501  07C2  2FC4               	goto	u91
+   502  07C3  2FC5               	goto	u90
+   503  07C4                     u91:
+   504  07C4  2FD0               	goto	l875
+   505  07C5                     u90:
+   506  07C5                     l871:
+   507  07C5  3011               	movlw	17
+   508  07C6  0278               	subwf	_jugador2,w
+   509  07C7  1803               	skipnc
+   510  07C8  2FCA               	goto	u101
+   511  07C9  2FCB               	goto	u100
+   512  07CA                     u101:
+   513  07CA  2FD0               	goto	l875
+   514  07CB                     u100:
+   515  07CB                     l873:
+   516                           
+   517                           ;wenas_prueba_lab0.c: 107:                 {;wenas_prueba_lab0.c: 109:                  
+      +                             PORTE=0x0f;
+   518  07CB  300F               	movlw	15
+   519  07CC  1283               	bcf	3,5	;RP0=0, select bank0
+   520  07CD  1303               	bcf	3,6	;RP1=0, select bank0
+   521  07CE  0089               	movwf	9	;volatile
+   522                           
+   523                           ;wenas_prueba_lab0.c: 110:                 }
+   524  07CF  2FE4               	goto	l883
+   525  07D0                     l875:
+   526  07D0  3011               	movlw	17
+   527  07D1  0279               	subwf	_jugador1,w
+   528  07D2  1803               	skipnc
+   529  07D3  2FD5               	goto	u111
+   530  07D4  2FD6               	goto	u110
+   531  07D5                     u111:
+   532  07D5  2FE1               	goto	l881
+   533  07D6                     u110:
+   534  07D6                     l877:
+   535  07D6  3011               	movlw	17
+   536  07D7  0678               	xorwf	_jugador2,w
+   537  07D8  1D03               	btfss	3,2
+   538  07D9  2FDB               	goto	u121
+   539  07DA  2FDC               	goto	u120
+   540  07DB                     u121:
+   541  07DB  2FE1               	goto	l881
+   542  07DC                     u120:
+   543  07DC                     l879:
    544                           
-   545                           ;wenas_prueba_lab0.c: 141:                     PORTCbits.RC3=1;
-   546  006E  1587               	bsf	7,3	;volatile
-   547                           
-   548                           ;wenas_prueba_lab0.c: 142:                     PORTCbits.RC4=0;
-   549  006F  1207               	bcf	7,4	;volatile
+   545                           ;wenas_prueba_lab0.c: 112:                 {;wenas_prueba_lab0.c: 114:                  
+      +                             PORTE=0xf0;
+   546  07DC  30F0               	movlw	240
+   547  07DD  1283               	bcf	3,5	;RP0=0, select bank0
+   548  07DE  1303               	bcf	3,6	;RP1=0, select bank0
+   549  07DF  0089               	movwf	9	;volatile
    550                           
-   551                           ;wenas_prueba_lab0.c: 143:                     PORTCbits.RC5=0;
-   552  0070  1287               	bcf	7,5	;volatile
-   553                           
-   554                           ;wenas_prueba_lab0.c: 144:                     PORTCbits.RC6=0;
-   555  0071  1307               	bcf	7,6	;volatile
-   556                           
-   557                           ;wenas_prueba_lab0.c: 145:                     PORTCbits.RC7=0;
-   558  0072  1387               	bcf	7,7	;volatile
-   559                           
-   560                           ;wenas_prueba_lab0.c: 146:                     break;
-   561  0073  281D               	goto	l784
-   562  0074                     l84:	
-   563                           ;wenas_prueba_lab0.c: 148:                 case(5):
-   564                           
-   565                           
-   566                           ;wenas_prueba_lab0.c: 149:                     PORTCbits.RC0=1;
-   567  0074  1407               	bsf	7,0	;volatile
-   568                           
-   569                           ;wenas_prueba_lab0.c: 150:                     PORTCbits.RC1=1;
-   570  0075  1487               	bsf	7,1	;volatile
-   571                           
-   572                           ;wenas_prueba_lab0.c: 151:                     PORTCbits.RC2=1;
-   573  0076  1507               	bsf	7,2	;volatile
-   574                           
-   575                           ;wenas_prueba_lab0.c: 152:                     PORTCbits.RC3=1;
-   576  0077  1587               	bsf	7,3	;volatile
-   577                           
-   578                           ;wenas_prueba_lab0.c: 153:                     PORTCbits.RC4=1;
-   579  0078  1607               	bsf	7,4	;volatile
+   551                           ;wenas_prueba_lab0.c: 115:                 }
+   552  07E0  2FE4               	goto	l883
+   553  07E1                     l881:
+   554                           
+   555                           ;wenas_prueba_lab0.c: 117:                 {;wenas_prueba_lab0.c: 118:                  
+      +                             PORTE=0x00;
+   556  07E1  1283               	bcf	3,5	;RP0=0, select bank0
+   557  07E2  1303               	bcf	3,6	;RP1=0, select bank0
+   558  07E3  0189               	clrf	9	;volatile
+   559  07E4                     l883:
+   560                           
+   561                           ;wenas_prueba_lab0.c: 78:             while(PORTBbits.RB0)
+   562  07E4  1283               	bcf	3,5	;RP0=0, select bank0
+   563  07E5  1303               	bcf	3,6	;RP1=0, select bank0
+   564  07E6  1806               	btfsc	6,0	;volatile
+   565  07E7  2FE9               	goto	u131
+   566  07E8  2FEA               	goto	u130
+   567  07E9                     u131:
+   568  07E9  2F71               	goto	l74
+   569  07EA                     u130:
+   570  07EA  2FF1               	goto	l889
+   571  07EB                     l885:
+   572                           
+   573                           ;wenas_prueba_lab0.c: 125:         {;wenas_prueba_lab0.c: 126:             antirrebote1=
+      +                          0;
+   574  07EB  01FC               	clrf	_antirrebote1
+   575  07EC                     l887:
+   576                           
+   577                           ;wenas_prueba_lab0.c: 127:             semaforo_apagado();
+   578  07EC  120A  118A  25B3  120A  118A  	fcall	_semaforo_apagado
+   579  07F1                     l889:
    580                           
-   581                           ;wenas_prueba_lab0.c: 154:                     PORTCbits.RC5=0;
-   582  0079  1287               	bcf	7,5	;volatile
-   583                           
-   584                           ;wenas_prueba_lab0.c: 155:                     PORTCbits.RC6=0;
-   585  007A  1307               	bcf	7,6	;volatile
-   586                           
-   587                           ;wenas_prueba_lab0.c: 156:                     PORTCbits.RC7=0;
-   588  007B  1387               	bcf	7,7	;volatile
-   589                           
-   590                           ;wenas_prueba_lab0.c: 157:                     break;
-   591  007C  281D               	goto	l784
-   592  007D                     l85:	
-   593                           ;wenas_prueba_lab0.c: 159:                 case(6):
-   594                           
-   595                           
-   596                           ;wenas_prueba_lab0.c: 160:                     PORTCbits.RC0=1;
-   597  007D  1407               	bsf	7,0	;volatile
-   598                           
-   599                           ;wenas_prueba_lab0.c: 161:                     PORTCbits.RC1=1;
-   600  007E  1487               	bsf	7,1	;volatile
-   601                           
-   602                           ;wenas_prueba_lab0.c: 162:                     PORTCbits.RC2=1;
-   603  007F  1507               	bsf	7,2	;volatile
-   604                           
-   605                           ;wenas_prueba_lab0.c: 163:                     PORTCbits.RC3=1;
-   606  0080  1587               	bsf	7,3	;volatile
-   607                           
-   608                           ;wenas_prueba_lab0.c: 164:                     PORTCbits.RC4=1;
-   609  0081  1607               	bsf	7,4	;volatile
-   610                           
-   611                           ;wenas_prueba_lab0.c: 165:                     PORTCbits.RC5=1;
-   612  0082  1687               	bsf	7,5	;volatile
-   613                           
-   614                           ;wenas_prueba_lab0.c: 166:                     PORTCbits.RC6=0;
-   615  0083  1307               	bcf	7,6	;volatile
-   616                           
-   617                           ;wenas_prueba_lab0.c: 167:                     PORTCbits.RC7=0;
-   618  0084  1387               	bcf	7,7	;volatile
-   619                           
-   620                           ;wenas_prueba_lab0.c: 168:                     break;
-   621  0085  281D               	goto	l784
-   622  0086                     l86:	
-   623                           ;wenas_prueba_lab0.c: 170:                 case(7):
-   624                           
-   625                           
-   626                           ;wenas_prueba_lab0.c: 171:                     PORTCbits.RC0=1;
-   627  0086  1407               	bsf	7,0	;volatile
+   581                           ;wenas_prueba_lab0.c: 129:         antirrebote1=0;
+   582  07F1  01FC               	clrf	_antirrebote1
+   583  07F2                     l891:
+   584                           
+   585                           ;wenas_prueba_lab0.c: 130:         antirrebote2=0;
+   586  07F2  01FB               	clrf	_antirrebote2
+   587  07F3  2F65               	goto	l843
+   588  07F4  120A  118A  2800   	ljmp	start
+   589  07F7                     __end_of_main:
+   590                           
+   591                           	psect	text1
+   592  05B9                     __ptext1:	
+   593 ;; *************** function _setup *****************
+   594 ;; Defined at:
+   595 ;;		line 137 in file "wenas_prueba_lab0.c"
+   596 ;; Parameters:    Size  Location     Type
+   597 ;;		None
+   598 ;; Auto vars:     Size  Location     Type
+   599 ;;		None
+   600 ;; Return value:  Size  Location     Type
+   601 ;;                  1    wreg      void 
+   602 ;; Registers used:
+   603 ;;		wreg, status,2, status,0
+   604 ;; Tracked objects:
+   605 ;;		On entry : 0/0
+   606 ;;		On exit  : 0/0
+   607 ;;		Unchanged: 0/0
+   608 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   609 ;;      Params:         0       0       0       0       0
+   610 ;;      Locals:         0       0       0       0       0
+   611 ;;      Temps:          0       0       0       0       0
+   612 ;;      Totals:         0       0       0       0       0
+   613 ;;Total ram usage:        0 bytes
+   614 ;; Hardware stack levels used:    1
+   615 ;; This function calls:
+   616 ;;		Nothing
+   617 ;; This function is called by:
+   618 ;;		_main
+   619 ;; This function uses a non-reentrant model
+   620 ;;
+   621                           
+   622                           
+   623                           ;psect for function _setup
+   624  05B9                     _setup:
+   625  05B9                     l727:	
+   626                           ;incstack = 0
+   627                           ; Regs used in _setup: [wreg+status,2+status,0]
    628                           
-   629                           ;wenas_prueba_lab0.c: 172:                     PORTCbits.RC1=1;
-   630  0087  1487               	bsf	7,1	;volatile
-   631                           
-   632                           ;wenas_prueba_lab0.c: 173:                     PORTCbits.RC2=1;
-   633  0088  1507               	bsf	7,2	;volatile
+   629                           
+   630                           ;wenas_prueba_lab0.c: 140:     ANSEL=0;
+   631  05B9  1683               	bsf	3,5	;RP0=1, select bank3
+   632  05BA  1703               	bsf	3,6	;RP1=1, select bank3
+   633  05BB  0188               	clrf	8	;volatile
    634                           
-   635                           ;wenas_prueba_lab0.c: 174:                     PORTCbits.RC3=1;
-   636  0089  1587               	bsf	7,3	;volatile
+   635                           ;wenas_prueba_lab0.c: 141:     ANSELH=0;
+   636  05BC  0189               	clrf	9	;volatile
    637                           
-   638                           ;wenas_prueba_lab0.c: 175:                     PORTCbits.RC4=1;
-   639  008A  1607               	bsf	7,4	;volatile
-   640                           
-   641                           ;wenas_prueba_lab0.c: 176:                     PORTCbits.RC5=1;
-   642  008B  1687               	bsf	7,5	;volatile
+   638                           ;wenas_prueba_lab0.c: 144:     TRISA=0;
+   639  05BD  1683               	bsf	3,5	;RP0=1, select bank1
+   640  05BE  1303               	bcf	3,6	;RP1=0, select bank1
+   641  05BF  0185               	clrf	5	;volatile
+   642  05C0                     l729:
    643                           
-   644                           ;wenas_prueba_lab0.c: 177:                     PORTCbits.RC6=1;
-   645  008C  1707               	bsf	7,6	;volatile
-   646                           
-   647                           ;wenas_prueba_lab0.c: 178:                     PORTCbits.RC7=0;
-   648  008D  1387               	bcf	7,7	;volatile
-   649                           
-   650                           ;wenas_prueba_lab0.c: 179:                     break;
-   651  008E  281D               	goto	l784
-   652  008F                     l87:	
-   653                           ;wenas_prueba_lab0.c: 181:                 case(8):
+   644                           ;wenas_prueba_lab0.c: 145:     TRISBbits.TRISB0=1;
+   645  05C0  1406               	bsf	6,0	;volatile
+   646  05C1                     l731:
+   647                           
+   648                           ;wenas_prueba_lab0.c: 146:     TRISBbits.TRISB1=1;
+   649  05C1  1486               	bsf	6,1	;volatile
+   650  05C2                     l733:
+   651                           
+   652                           ;wenas_prueba_lab0.c: 147:     TRISBbits.TRISB2=1;
+   653  05C2  1506               	bsf	6,2	;volatile
    654                           
-   655                           
-   656                           ;wenas_prueba_lab0.c: 182:                     PORTCbits.RC0=1;
-   657  008F  1407               	bsf	7,0	;volatile
-   658                           
-   659                           ;wenas_prueba_lab0.c: 183:                     PORTCbits.RC1=1;
-   660  0090  1487               	bsf	7,1	;volatile
-   661                           
-   662                           ;wenas_prueba_lab0.c: 184:                     PORTCbits.RC2=1;
-   663  0091  1507               	bsf	7,2	;volatile
-   664                           
-   665                           ;wenas_prueba_lab0.c: 185:                     PORTCbits.RC3=1;
-   666  0092  1587               	bsf	7,3	;volatile
-   667                           
-   668                           ;wenas_prueba_lab0.c: 186:                     PORTCbits.RC4=1;
-   669  0093  1607               	bsf	7,4	;volatile
-   670                           
-   671                           ;wenas_prueba_lab0.c: 187:                     PORTCbits.RC5=1;
-   672  0094  1687               	bsf	7,5	;volatile
-   673                           
-   674                           ;wenas_prueba_lab0.c: 188:                     PORTCbits.RC6=1;
-   675  0095  1707               	bsf	7,6	;volatile
-   676                           
-   677                           ;wenas_prueba_lab0.c: 189:                     PORTCbits.RC7=1;
-   678  0096  1787               	bsf	7,7	;volatile
-   679                           
-   680                           ;wenas_prueba_lab0.c: 190:                     break;
-   681  0097  281D               	goto	l784
-   682  0098                     l804:
-   683                           
-   684                           ;wenas_prueba_lab0.c: 193:                     jugador1=0;
-   685  0098  01FA               	clrf	_jugador1
-   686  0099                     l806:
-   687                           
-   688                           ;wenas_prueba_lab0.c: 194:                     PORTCbits.RC0=0;
-   689  0099  1007               	bcf	7,0	;volatile
-   690  009A                     l808:
-   691                           
-   692                           ;wenas_prueba_lab0.c: 195:                     PORTCbits.RC1=0;
-   693  009A  1087               	bcf	7,1	;volatile
-   694  009B                     l810:
-   695                           
-   696                           ;wenas_prueba_lab0.c: 196:                     PORTCbits.RC2=0;
-   697  009B  1107               	bcf	7,2	;volatile
-   698  009C                     l812:
-   699                           
-   700                           ;wenas_prueba_lab0.c: 197:                     PORTCbits.RC3=0;
-   701  009C  1187               	bcf	7,3	;volatile
-   702  009D                     l814:
-   703                           
-   704                           ;wenas_prueba_lab0.c: 198:                     PORTCbits.RC4=0;
-   705  009D  1207               	bcf	7,4	;volatile
-   706  009E                     l816:
-   707                           
-   708                           ;wenas_prueba_lab0.c: 199:                     PORTCbits.RC5=0;
-   709  009E  1287               	bcf	7,5	;volatile
-   710  009F                     l818:
-   711                           
-   712                           ;wenas_prueba_lab0.c: 200:                     PORTCbits.RC6=0;
-   713  009F  1307               	bcf	7,6	;volatile
-   714  00A0                     l820:
-   715                           
-   716                           ;wenas_prueba_lab0.c: 201:                     PORTCbits.RC7=0;
-   717  00A0  1387               	bcf	7,7	;volatile
+   655                           ;wenas_prueba_lab0.c: 148:     TRISC=0;
+   656  05C3  0187               	clrf	7	;volatile
+   657                           
+   658                           ;wenas_prueba_lab0.c: 149:     TRISD=0;
+   659  05C4  0188               	clrf	8	;volatile
+   660                           
+   661                           ;wenas_prueba_lab0.c: 150:     TRISE=0;
+   662  05C5  0189               	clrf	9	;volatile
+   663                           
+   664                           ;wenas_prueba_lab0.c: 152:     PORTA=0;
+   665  05C6  1283               	bcf	3,5	;RP0=0, select bank0
+   666  05C7  1303               	bcf	3,6	;RP1=0, select bank0
+   667  05C8  0185               	clrf	5	;volatile
+   668                           
+   669                           ;wenas_prueba_lab0.c: 153:     PORTB=0;
+   670  05C9  0186               	clrf	6	;volatile
+   671                           
+   672                           ;wenas_prueba_lab0.c: 154:     PORTC=0;
+   673  05CA  0187               	clrf	7	;volatile
+   674                           
+   675                           ;wenas_prueba_lab0.c: 155:     PORTD=0;
+   676  05CB  0188               	clrf	8	;volatile
+   677                           
+   678                           ;wenas_prueba_lab0.c: 156:     PORTE=0;
+   679  05CC  0189               	clrf	9	;volatile
+   680  05CD                     l735:
+   681                           
+   682                           ;wenas_prueba_lab0.c: 159:     OSCCONbits.IRCF = 0b110;
+   683  05CD  1683               	bsf	3,5	;RP0=1, select bank1
+   684  05CE  1303               	bcf	3,6	;RP1=0, select bank1
+   685  05CF  080F               	movf	15,w	;volatile
+   686  05D0  398F               	andlw	-113
+   687  05D1  3860               	iorlw	96
+   688  05D2  008F               	movwf	15	;volatile
+   689  05D3                     l737:
+   690                           
+   691                           ;wenas_prueba_lab0.c: 160:     OSCCONbits.SCS = 1;
+   692  05D3  140F               	bsf	15,0	;volatile
+   693  05D4                     l739:
+   694                           
+   695                           ;wenas_prueba_lab0.c: 163:     OPTION_REGbits.nRBPU = 0;
+   696  05D4  1381               	bcf	1,7	;volatile
+   697  05D5                     l741:
+   698                           
+   699                           ;wenas_prueba_lab0.c: 164:     WPUBbits.WPUB0 = 1;
+   700  05D5  1415               	bsf	21,0	;volatile
+   701  05D6                     l743:
+   702                           
+   703                           ;wenas_prueba_lab0.c: 165:     WPUBbits.WPUB1 = 1;
+   704  05D6  1495               	bsf	21,1	;volatile
+   705  05D7                     l745:
+   706                           
+   707                           ;wenas_prueba_lab0.c: 166:     WPUBbits.WPUB2 = 1;
+   708  05D7  1515               	bsf	21,2	;volatile
+   709  05D8                     l747:
+   710                           
+   711                           ;wenas_prueba_lab0.c: 170:     INTCONbits.GIE=1;
+   712  05D8  178B               	bsf	11,7	;volatile
+   713  05D9                     l749:
+   714                           
+   715                           ;wenas_prueba_lab0.c: 171:     INTCONbits.T0IE=1;
+   716  05D9  168B               	bsf	11,5	;volatile
+   717  05DA                     l751:
    718                           
-   719                           ;wenas_prueba_lab0.c: 202:                     break;
-   720  00A1  281D               	goto	l784
-   721  00A2                     l824:
-   722  00A2  087A               	movf	_jugador1,w
-   723  00A3  00F7               	movwf	??_main
-   724  00A4  01F8               	clrf	??_main+1
-   725                           
-   726                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
-      +                          itches
-   727                           ; Switch size 1, requested type "simple"
-   728                           ; Number of cases is 1, Range of values is 0 to 0
-   729                           ; switch strategies available:
-   730                           ; Name         Instructions Cycles
-   731                           ; simple_byte            4     3 (average)
-   732                           ; direct_byte           11     8 (fixed)
-   733                           ; jumptable            260     6 (fixed)
-   734                           ;	Chosen strategy is simple_byte
-   735  00A5  0878               	movf	??_main+1,w
-   736  00A6  3A00               	xorlw	0	; case 0
-   737  00A7  1903               	skipnz
-   738  00A8  28AA               	goto	l946
-   739  00A9  281D               	goto	l784
-   740  00AA                     l946:
-   741                           
-   742                           ; Switch size 1, requested type "simple"
-   743                           ; Number of cases is 9, Range of values is 1 to 9
-   744                           ; switch strategies available:
-   745                           ; Name         Instructions Cycles
-   746                           ; simple_byte           28    15 (average)
-   747                           ; direct_byte           38    11 (fixed)
-   748                           ; jumptable            263     9 (fixed)
-   749                           ;	Chosen strategy is simple_byte
-   750  00AA  0877               	movf	??_main,w
-   751  00AB  3A01               	xorlw	1	; case 1
-   752  00AC  1903               	skipnz
-   753  00AD  2850               	goto	l79
-   754  00AE  3A03               	xorlw	3	; case 2
-   755  00AF  1903               	skipnz
-   756  00B0  2859               	goto	l81
-   757  00B1  3A01               	xorlw	1	; case 3
-   758  00B2  1903               	skipnz
-   759  00B3  2862               	goto	l82
-   760  00B4  3A07               	xorlw	7	; case 4
-   761  00B5  1903               	skipnz
-   762  00B6  286B               	goto	l83
-   763  00B7  3A01               	xorlw	1	; case 5
-   764  00B8  1903               	skipnz
-   765  00B9  2874               	goto	l84
-   766  00BA  3A03               	xorlw	3	; case 6
-   767  00BB  1903               	skipnz
-   768  00BC  287D               	goto	l85
-   769  00BD  3A01               	xorlw	1	; case 7
-   770  00BE  1903               	skipnz
-   771  00BF  2886               	goto	l86
-   772  00C0  3A0F               	xorlw	15	; case 8
-   773  00C1  1903               	skipnz
-   774  00C2  288F               	goto	l87
-   775  00C3  3A01               	xorlw	1	; case 9
-   776  00C4  1903               	skipnz
-   777  00C5  2898               	goto	l804
-   778  00C6  281D               	goto	l784
-   779  00C7                     l826:
-   780                           
-   781                           ;wenas_prueba_lab0.c: 206:         {;wenas_prueba_lab0.c: 207:             antirrebote2 
-      +                          = 0;
-   782  00C7  01FC               	clrf	_antirrebote2
-   783  00C8                     l828:
+   719                           ;wenas_prueba_lab0.c: 172:     INTCONbits.TMR0IF=0;
+   720  05DA  110B               	bcf	11,2	;volatile
+   721  05DB                     l753:
+   722                           
+   723                           ;wenas_prueba_lab0.c: 173:     INTCONbits.TMR0IE=1;
+   724  05DB  168B               	bsf	11,5	;volatile
+   725  05DC                     l755:
+   726                           
+   727                           ;wenas_prueba_lab0.c: 174:     INTCONbits.RBIE=1;
+   728  05DC  158B               	bsf	11,3	;volatile
+   729  05DD                     l757:
+   730                           
+   731                           ;wenas_prueba_lab0.c: 175:     INTCONbits.RBIF=0;
+   732  05DD  100B               	bcf	11,0	;volatile
+   733  05DE                     l759:
+   734                           
+   735                           ;wenas_prueba_lab0.c: 176:     PIE1bits.TMR1IE=1;
+   736  05DE  140C               	bsf	12,0	;volatile
+   737  05DF                     l761:
+   738                           
+   739                           ;wenas_prueba_lab0.c: 177:     PIR1bits.TMR1IF=0;
+   740  05DF  1283               	bcf	3,5	;RP0=0, select bank0
+   741  05E0  1303               	bcf	3,6	;RP1=0, select bank0
+   742  05E1  100C               	bcf	12,0	;volatile
+   743  05E2                     l90:
+   744  05E2  0008               	return
+   745  05E3                     __end_of_setup:
+   746                           
+   747                           	psect	text2
+   748  05E3                     __ptext2:	
+   749 ;; *************** function _semaforo_inicio *****************
+   750 ;; Defined at:
+   751 ;;		line 186 in file "wenas_prueba_lab0.c"
+   752 ;; Parameters:    Size  Location     Type
+   753 ;;		None
+   754 ;; Auto vars:     Size  Location     Type
+   755 ;;  semaforo        2    3[COMMON] int 
+   756 ;; Return value:  Size  Location     Type
+   757 ;;                  1    wreg      void 
+   758 ;; Registers used:
+   759 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1
+   760 ;; Tracked objects:
+   761 ;;		On entry : 0/0
+   762 ;;		On exit  : 0/0
+   763 ;;		Unchanged: 0/0
+   764 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   765 ;;      Params:         0       0       0       0       0
+   766 ;;      Locals:         2       0       0       0       0
+   767 ;;      Temps:          3       0       0       0       0
+   768 ;;      Totals:         5       0       0       0       0
+   769 ;;Total ram usage:        5 bytes
+   770 ;; Hardware stack levels used:    1
+   771 ;; This function calls:
+   772 ;;		Nothing
+   773 ;; This function is called by:
+   774 ;;		_main
+   775 ;; This function uses a non-reentrant model
+   776 ;;
+   777                           
+   778                           
+   779                           ;psect for function _semaforo_inicio
+   780  05E3                     _semaforo_inicio:
+   781  05E3                     l765:	
+   782                           ;incstack = 0
+   783                           ; Regs used in _semaforo_inicio: [wreg-fsr0h+status,2+status,0+btemp+1]
    784                           
-   785                           ;wenas_prueba_lab0.c: 208:             PORTCbits.RC0=0;
-   786  00C8  1007               	bcf	7,0	;volatile
-   787  00C9                     l830:
-   788                           
-   789                           ;wenas_prueba_lab0.c: 209:             PORTCbits.RC1=0;
-   790  00C9  1087               	bcf	7,1	;volatile
-   791  00CA                     l832:
-   792                           
-   793                           ;wenas_prueba_lab0.c: 210:             PORTCbits.RC2=0;
-   794  00CA  1107               	bcf	7,2	;volatile
-   795  00CB                     l834:
-   796                           
-   797                           ;wenas_prueba_lab0.c: 211:             PORTCbits.RC3=0;
-   798  00CB  1187               	bcf	7,3	;volatile
-   799  00CC                     l836:
+   785                           
+   786                           ;wenas_prueba_lab0.c: 188:     for (int semaforo=1; semaforo<6;semaforo++)
+   787  05E3  3001               	movlw	1
+   788  05E4  00F3               	movwf	semaforo_inicio@semaforo
+   789  05E5  3000               	movlw	0
+   790  05E6  00F4               	movwf	semaforo_inicio@semaforo+1
+   791  05E7  2E13               	goto	l783
+   792  05E8                     l96:	
+   793                           ;wenas_prueba_lab0.c: 191:         {;wenas_prueba_lab0.c: 192:             case(1):
+   794                           
+   795                           
+   796                           ;wenas_prueba_lab0.c: 193:                 PORTEbits.RE0=0;
+   797  05E8  1283               	bcf	3,5	;RP0=0, select bank0
+   798  05E9  1303               	bcf	3,6	;RP1=0, select bank0
+   799  05EA  1009               	bcf	9,0	;volatile
    800                           
-   801                           ;wenas_prueba_lab0.c: 212:             PORTCbits.RC4=0;
-   802  00CC  1207               	bcf	7,4	;volatile
-   803  00CD                     l838:
-   804                           
-   805                           ;wenas_prueba_lab0.c: 213:             PORTCbits.RC5=0;
-   806  00CD  1287               	bcf	7,5	;volatile
-   807  00CE                     l840:
-   808                           
-   809                           ;wenas_prueba_lab0.c: 214:             PORTCbits.RC6=0;
-   810  00CE  1307               	bcf	7,6	;volatile
-   811  00CF                     l842:
-   812                           
-   813                           ;wenas_prueba_lab0.c: 215:             PORTCbits.RC7=0;
-   814  00CF  1387               	bcf	7,7	;volatile
-   815  00D0  281D               	goto	l784
-   816  00D1  120A  118A  280C   	ljmp	start
-   817  00D4                     __end_of_main:
-   818                           
-   819                           	psect	text1
-   820  012E                     __ptext1:	
-   821 ;; *************** function _setup *****************
-   822 ;; Defined at:
-   823 ;;		line 223 in file "wenas_prueba_lab0.c"
-   824 ;; Parameters:    Size  Location     Type
-   825 ;;		None
-   826 ;; Auto vars:     Size  Location     Type
-   827 ;;		None
-   828 ;; Return value:  Size  Location     Type
-   829 ;;                  1    wreg      void 
-   830 ;; Registers used:
-   831 ;;		wreg, status,2, status,0
-   832 ;; Tracked objects:
-   833 ;;		On entry : 0/0
-   834 ;;		On exit  : 0/0
-   835 ;;		Unchanged: 0/0
-   836 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   837 ;;      Params:         0       0       0       0       0
-   838 ;;      Locals:         0       0       0       0       0
-   839 ;;      Temps:          0       0       0       0       0
-   840 ;;      Totals:         0       0       0       0       0
-   841 ;;Total ram usage:        0 bytes
-   842 ;; Hardware stack levels used:    1
-   843 ;; Hardware stack levels required when called:    1
-   844 ;; This function calls:
-   845 ;;		Nothing
-   846 ;; This function is called by:
-   847 ;;		_main
-   848 ;; This function uses a non-reentrant model
-   849 ;;
-   850                           
-   851                           
-   852                           ;psect for function _setup
-   853  012E                     _setup:
-   854  012E                     l716:	
-   855                           ;incstack = 0
-   856                           ; Regs used in _setup: [wreg+status,2+status,0]
-   857                           
-   858                           
-   859                           ;wenas_prueba_lab0.c: 226:     ANSEL=0;
-   860  012E  1683               	bsf	3,5	;RP0=1, select bank3
-   861  012F  1703               	bsf	3,6	;RP1=1, select bank3
-   862  0130  0188               	clrf	8	;volatile
-   863                           
-   864                           ;wenas_prueba_lab0.c: 227:     ANSELH=0;
-   865  0131  0189               	clrf	9	;volatile
-   866                           
-   867                           ;wenas_prueba_lab0.c: 230:     TRISA=0;
-   868  0132  1683               	bsf	3,5	;RP0=1, select bank1
-   869  0133  1303               	bcf	3,6	;RP1=0, select bank1
-   870  0134  0185               	clrf	5	;volatile
-   871  0135                     l718:
-   872                           
-   873                           ;wenas_prueba_lab0.c: 231:     TRISBbits.TRISB0=1;
-   874  0135  1406               	bsf	6,0	;volatile
-   875  0136                     l720:
-   876                           
-   877                           ;wenas_prueba_lab0.c: 232:     TRISBbits.TRISB1=1;
-   878  0136  1486               	bsf	6,1	;volatile
-   879  0137                     l722:
-   880                           
-   881                           ;wenas_prueba_lab0.c: 233:     TRISBbits.TRISB2=1;
-   882  0137  1506               	bsf	6,2	;volatile
-   883                           
-   884                           ;wenas_prueba_lab0.c: 234:     TRISC=0;
-   885  0138  0187               	clrf	7	;volatile
-   886                           
-   887                           ;wenas_prueba_lab0.c: 235:     TRISD=0;
-   888  0139  0188               	clrf	8	;volatile
-   889                           
-   890                           ;wenas_prueba_lab0.c: 236:     TRISE=0;
-   891  013A  0189               	clrf	9	;volatile
-   892                           
-   893                           ;wenas_prueba_lab0.c: 238:     PORTA=0;
-   894  013B  1283               	bcf	3,5	;RP0=0, select bank0
-   895  013C  1303               	bcf	3,6	;RP1=0, select bank0
-   896  013D  0185               	clrf	5	;volatile
-   897                           
-   898                           ;wenas_prueba_lab0.c: 239:     PORTB=0;
-   899  013E  0186               	clrf	6	;volatile
-   900                           
-   901                           ;wenas_prueba_lab0.c: 240:     PORTC=0;
-   902  013F  0187               	clrf	7	;volatile
-   903                           
-   904                           ;wenas_prueba_lab0.c: 241:     PORTD=0;
-   905  0140  0188               	clrf	8	;volatile
-   906                           
-   907                           ;wenas_prueba_lab0.c: 242:     PORTE=0;
-   908  0141  0189               	clrf	9	;volatile
-   909  0142                     l724:
-   910                           
-   911                           ;wenas_prueba_lab0.c: 245:     OSCCONbits.IRCF = 0b110;
-   912  0142  1683               	bsf	3,5	;RP0=1, select bank1
-   913  0143  1303               	bcf	3,6	;RP1=0, select bank1
-   914  0144  080F               	movf	15,w	;volatile
-   915  0145  398F               	andlw	-113
-   916  0146  3860               	iorlw	96
-   917  0147  008F               	movwf	15	;volatile
-   918  0148                     l726:
-   919                           
-   920                           ;wenas_prueba_lab0.c: 246:     OSCCONbits.SCS = 1;
-   921  0148  140F               	bsf	15,0	;volatile
-   922  0149                     l728:
-   923                           
-   924                           ;wenas_prueba_lab0.c: 249:     OPTION_REGbits.nRBPU = 0;
-   925  0149  1381               	bcf	1,7	;volatile
-   926  014A                     l730:
-   927                           
-   928                           ;wenas_prueba_lab0.c: 250:     WPUBbits.WPUB0 = 1;
-   929  014A  1415               	bsf	21,0	;volatile
-   930  014B                     l732:
-   931                           
-   932                           ;wenas_prueba_lab0.c: 251:     WPUBbits.WPUB1 = 1;
-   933  014B  1495               	bsf	21,1	;volatile
-   934  014C                     l734:
-   935                           
-   936                           ;wenas_prueba_lab0.c: 252:     WPUBbits.WPUB2 = 1;
-   937  014C  1515               	bsf	21,2	;volatile
-   938  014D                     l736:
-   939                           
-   940                           ;wenas_prueba_lab0.c: 255:     INTCONbits.GIE=1;
-   941  014D  178B               	bsf	11,7	;volatile
-   942  014E                     l738:
-   943                           
-   944                           ;wenas_prueba_lab0.c: 256:     INTCONbits.T0IE=1;
-   945  014E  168B               	bsf	11,5	;volatile
-   946  014F                     l740:
-   947                           
-   948                           ;wenas_prueba_lab0.c: 257:     INTCONbits.TMR0IF=0;
-   949  014F  110B               	bcf	11,2	;volatile
-   950  0150                     l742:
-   951                           
-   952                           ;wenas_prueba_lab0.c: 258:     INTCONbits.TMR0IE=1;
-   953  0150  168B               	bsf	11,5	;volatile
-   954  0151                     l744:
-   955                           
-   956                           ;wenas_prueba_lab0.c: 259:     INTCONbits.RBIF=0;
-   957  0151  100B               	bcf	11,0	;volatile
-   958  0152                     l746:
-   959                           
-   960                           ;wenas_prueba_lab0.c: 260:     PIE1bits.TMR1IE=1;
-   961  0152  140C               	bsf	12,0	;volatile
-   962  0153                     l748:
-   963                           
-   964                           ;wenas_prueba_lab0.c: 261:     PIR1bits.TMR1IF=0;
-   965  0153  1283               	bcf	3,5	;RP0=0, select bank0
-   966  0154  1303               	bcf	3,6	;RP1=0, select bank0
-   967  0155  100C               	bcf	12,0	;volatile
-   968  0156                     l95:
-   969  0156  0008               	return
-   970  0157                     __end_of_setup:
-   971                           
-   972                           	psect	text2
-   973  00D4                     __ptext2:	
-   974 ;; *************** function _semaforo_inicio *****************
-   975 ;; Defined at:
-   976 ;;		line 270 in file "wenas_prueba_lab0.c"
-   977 ;; Parameters:    Size  Location     Type
-   978 ;;		None
-   979 ;; Auto vars:     Size  Location     Type
-   980 ;;  semaforo        2    5[COMMON] int 
-   981 ;; Return value:  Size  Location     Type
-   982 ;;                  1    wreg      void 
-   983 ;; Registers used:
-   984 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1
-   985 ;; Tracked objects:
-   986 ;;		On entry : 0/0
-   987 ;;		On exit  : 0/0
-   988 ;;		Unchanged: 0/0
-   989 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   990 ;;      Params:         0       0       0       0       0
-   991 ;;      Locals:         2       0       0       0       0
-   992 ;;      Temps:          3       0       0       0       0
-   993 ;;      Totals:         5       0       0       0       0
-   994 ;;Total ram usage:        5 bytes
-   995 ;; Hardware stack levels used:    1
-   996 ;; Hardware stack levels required when called:    1
-   997 ;; This function calls:
-   998 ;;		Nothing
-   999 ;; This function is called by:
-  1000 ;;		_main
-  1001 ;; This function uses a non-reentrant model
-  1002 ;;
-  1003                           
-  1004                           
-  1005                           ;psect for function _semaforo_inicio
-  1006  00D4                     _semaforo_inicio:
-  1007  00D4                     l752:	
-  1008                           ;incstack = 0
-  1009                           ; Regs used in _semaforo_inicio: [wreg-fsr0h+status,2+status,0+btemp+1]
-  1010                           
-  1011                           
-  1012                           ;wenas_prueba_lab0.c: 272:     for (int semaforo=1; semaforo<6;semaforo++)
-  1013  00D4  3001               	movlw	1
-  1014  00D5  00F5               	movwf	semaforo_inicio@semaforo
-  1015  00D6  3000               	movlw	0
-  1016  00D7  00F6               	movwf	semaforo_inicio@semaforo+1
-  1017  00D8  2904               	goto	l770
-  1018  00D9                     l101:	
-  1019                           ;wenas_prueba_lab0.c: 275:         {;wenas_prueba_lab0.c: 276:             case(1):
-  1020                           
-  1021                           
-  1022                           ;wenas_prueba_lab0.c: 277:                 PORTEbits.RE0=0;
-  1023  00D9  1283               	bcf	3,5	;RP0=0, select bank0
-  1024  00DA  1303               	bcf	3,6	;RP1=0, select bank0
-  1025  00DB  1009               	bcf	9,0	;volatile
-  1026                           
-  1027                           ;wenas_prueba_lab0.c: 278:                 PORTEbits.RE1=0;
-  1028  00DC  1089               	bcf	9,1	;volatile
-  1029                           
-  1030                           ;wenas_prueba_lab0.c: 279:                 PORTEbits.RE2=0;
-  1031  00DD  1109               	bcf	9,2	;volatile
-  1032  00DE                     l758:
-  1033                           
-  1034                           ;wenas_prueba_lab0.c: 280:                 _delay((unsigned long)((500)*(4000000/4000.0)
+   801                           ;wenas_prueba_lab0.c: 194:                 PORTEbits.RE1=0;
+   802  05EB  1089               	bcf	9,1	;volatile
+   803                           
+   804                           ;wenas_prueba_lab0.c: 195:                 PORTEbits.RE2=0;
+   805  05EC  1109               	bcf	9,2	;volatile
+   806  05ED                     l771:
+   807                           
+   808                           ;wenas_prueba_lab0.c: 196:                 _delay((unsigned long)((500)*(4000000/4000.0)
       +                          ));
-  1035  00DE  3003               	movlw	3
-  1036  00DF  00F4               	movwf	??_semaforo_inicio+2
-  1037  00E0  308A               	movlw	138
-  1038  00E1  00F3               	movwf	??_semaforo_inicio+1
-  1039  00E2  3055               	movlw	85
-  1040  00E3  00F2               	movwf	??_semaforo_inicio
-  1041  00E4                     u87:
-  1042  00E4  0BF2               	decfsz	??_semaforo_inicio,f
-  1043  00E5  28E4               	goto	u87
-  1044  00E6  0BF3               	decfsz	??_semaforo_inicio+1,f
-  1045  00E7  28E4               	goto	u87
-  1046  00E8  0BF4               	decfsz	??_semaforo_inicio+2,f
-  1047  00E9  28E4               	goto	u87
-  1048  00EA  28EB               	nop2
-  1049                           
-  1050                           ;wenas_prueba_lab0.c: 281:                 break;
-  1051  00EB  291A               	goto	l772
-  1052  00EC                     l103:	
-  1053                           ;wenas_prueba_lab0.c: 283:             case(2):
-  1054                           
-  1055                           
-  1056                           ;wenas_prueba_lab0.c: 284:                 PORTEbits.RE0=1;
-  1057  00EC  1283               	bcf	3,5	;RP0=0, select bank0
-  1058  00ED  1303               	bcf	3,6	;RP1=0, select bank0
-  1059  00EE  1409               	bsf	9,0	;volatile
-  1060                           
-  1061                           ;wenas_prueba_lab0.c: 285:                 PORTEbits.RE1=0;
-  1062  00EF  1089               	bcf	9,1	;volatile
-  1063                           
-  1064                           ;wenas_prueba_lab0.c: 286:                 PORTEbits.RE2=0;
-  1065  00F0  1109               	bcf	9,2	;volatile
-  1066  00F1  28DE               	goto	l758
-  1067  00F2                     l104:	
-  1068                           ;wenas_prueba_lab0.c: 290:             case(3):
-  1069                           
-  1070                           
-  1071                           ;wenas_prueba_lab0.c: 291:                 PORTEbits.RE0=1;
-  1072  00F2  1283               	bcf	3,5	;RP0=0, select bank0
-  1073  00F3  1303               	bcf	3,6	;RP1=0, select bank0
-  1074  00F4  1409               	bsf	9,0	;volatile
-  1075                           
-  1076                           ;wenas_prueba_lab0.c: 292:                 PORTEbits.RE1=1;
-  1077  00F5  1489               	bsf	9,1	;volatile
-  1078                           
-  1079                           ;wenas_prueba_lab0.c: 293:                 PORTEbits.RE2=0;
-  1080  00F6  1109               	bcf	9,2	;volatile
-  1081  00F7  28DE               	goto	l758
-  1082  00F8                     l105:	
-  1083                           ;wenas_prueba_lab0.c: 297:             case(4):
-  1084                           
-  1085                           
-  1086                           ;wenas_prueba_lab0.c: 298:                 PORTEbits.RE0=1;
-  1087  00F8  1283               	bcf	3,5	;RP0=0, select bank0
-  1088  00F9  1303               	bcf	3,6	;RP1=0, select bank0
-  1089  00FA  1409               	bsf	9,0	;volatile
-  1090                           
-  1091                           ;wenas_prueba_lab0.c: 299:                 PORTEbits.RE1=1;
-  1092  00FB  1489               	bsf	9,1	;volatile
-  1093                           
-  1094                           ;wenas_prueba_lab0.c: 300:                 PORTEbits.RE2=1;
-  1095  00FC  1509               	bsf	9,2	;volatile
-  1096  00FD  28DE               	goto	l758
-  1097  00FE                     l106:	
-  1098                           ;wenas_prueba_lab0.c: 304:             case(5):
-  1099                           
-  1100                           
-  1101                           ;wenas_prueba_lab0.c: 305:                 PORTEbits.RE0=0;
-  1102  00FE  1283               	bcf	3,5	;RP0=0, select bank0
-  1103  00FF  1303               	bcf	3,6	;RP1=0, select bank0
-  1104  0100  1009               	bcf	9,0	;volatile
-  1105                           
-  1106                           ;wenas_prueba_lab0.c: 306:                 PORTEbits.RE1=0;
-  1107  0101  1089               	bcf	9,1	;volatile
-  1108                           
-  1109                           ;wenas_prueba_lab0.c: 307:                 PORTEbits.RE2=0;
-  1110  0102  1109               	bcf	9,2	;volatile
-  1111  0103  28DE               	goto	l758
-  1112  0104                     l770:
-  1113                           
-  1114                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+   809  05ED  3003               	movlw	3
+   810  05EE  00F2               	movwf	??_semaforo_inicio+2
+   811  05EF  308A               	movlw	138
+   812  05F0  00F1               	movwf	??_semaforo_inicio+1
+   813  05F1  3055               	movlw	85
+   814  05F2  00F0               	movwf	??_semaforo_inicio
+   815  05F3                     u167:
+   816  05F3  0BF0               	decfsz	??_semaforo_inicio,f
+   817  05F4  2DF3               	goto	u167
+   818  05F5  0BF1               	decfsz	??_semaforo_inicio+1,f
+   819  05F6  2DF3               	goto	u167
+   820  05F7  0BF2               	decfsz	??_semaforo_inicio+2,f
+   821  05F8  2DF3               	goto	u167
+   822  05F9  2DFA               	nop2
+   823                           
+   824                           ;wenas_prueba_lab0.c: 197:                 break;
+   825  05FA  2E29               	goto	l785
+   826  05FB                     l98:	
+   827                           ;wenas_prueba_lab0.c: 199:             case(2):
+   828                           
+   829                           
+   830                           ;wenas_prueba_lab0.c: 200:                 PORTEbits.RE0=1;
+   831  05FB  1283               	bcf	3,5	;RP0=0, select bank0
+   832  05FC  1303               	bcf	3,6	;RP1=0, select bank0
+   833  05FD  1409               	bsf	9,0	;volatile
+   834                           
+   835                           ;wenas_prueba_lab0.c: 201:                 PORTEbits.RE1=0;
+   836  05FE  1089               	bcf	9,1	;volatile
+   837                           
+   838                           ;wenas_prueba_lab0.c: 202:                 PORTEbits.RE2=0;
+   839  05FF  1109               	bcf	9,2	;volatile
+   840  0600  2DED               	goto	l771
+   841  0601                     l99:	
+   842                           ;wenas_prueba_lab0.c: 206:             case(3):
+   843                           
+   844                           
+   845                           ;wenas_prueba_lab0.c: 207:                 PORTEbits.RE0=1;
+   846  0601  1283               	bcf	3,5	;RP0=0, select bank0
+   847  0602  1303               	bcf	3,6	;RP1=0, select bank0
+   848  0603  1409               	bsf	9,0	;volatile
+   849                           
+   850                           ;wenas_prueba_lab0.c: 208:                 PORTEbits.RE1=1;
+   851  0604  1489               	bsf	9,1	;volatile
+   852                           
+   853                           ;wenas_prueba_lab0.c: 209:                 PORTEbits.RE2=0;
+   854  0605  1109               	bcf	9,2	;volatile
+   855  0606  2DED               	goto	l771
+   856  0607                     l100:	
+   857                           ;wenas_prueba_lab0.c: 213:             case(4):
+   858                           
+   859                           
+   860                           ;wenas_prueba_lab0.c: 214:                 PORTEbits.RE0=1;
+   861  0607  1283               	bcf	3,5	;RP0=0, select bank0
+   862  0608  1303               	bcf	3,6	;RP1=0, select bank0
+   863  0609  1409               	bsf	9,0	;volatile
+   864                           
+   865                           ;wenas_prueba_lab0.c: 215:                 PORTEbits.RE1=1;
+   866  060A  1489               	bsf	9,1	;volatile
+   867                           
+   868                           ;wenas_prueba_lab0.c: 216:                 PORTEbits.RE2=1;
+   869  060B  1509               	bsf	9,2	;volatile
+   870  060C  2DED               	goto	l771
+   871  060D                     l101:	
+   872                           ;wenas_prueba_lab0.c: 220:             case(5):
+   873                           
+   874                           
+   875                           ;wenas_prueba_lab0.c: 221:                 PORTEbits.RE0=0;
+   876  060D  1283               	bcf	3,5	;RP0=0, select bank0
+   877  060E  1303               	bcf	3,6	;RP1=0, select bank0
+   878  060F  1009               	bcf	9,0	;volatile
+   879                           
+   880                           ;wenas_prueba_lab0.c: 222:                 PORTEbits.RE1=0;
+   881  0610  1089               	bcf	9,1	;volatile
+   882                           
+   883                           ;wenas_prueba_lab0.c: 223:                 PORTEbits.RE2=0;
+   884  0611  1109               	bcf	9,2	;volatile
+   885  0612  2DED               	goto	l771
+   886  0613                     l783:
+   887                           
+   888                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-  1115                           ; Switch size 1, requested type "simple"
-  1116                           ; Number of cases is 1, Range of values is 0 to 0
-  1117                           ; switch strategies available:
-  1118                           ; Name         Instructions Cycles
-  1119                           ; simple_byte            4     3 (average)
-  1120                           ; direct_byte           11     8 (fixed)
-  1121                           ; jumptable            260     6 (fixed)
-  1122                           ;	Chosen strategy is simple_byte
-  1123  0104  0876               	movf	semaforo_inicio@semaforo+1,w
-  1124  0105  3A00               	xorlw	0	; case 0
-  1125  0106  1903               	skipnz
-  1126  0107  2909               	goto	l948
-  1127  0108  291A               	goto	l772
-  1128  0109                     l948:
-  1129                           
-  1130                           ; Switch size 1, requested type "simple"
-  1131                           ; Number of cases is 5, Range of values is 1 to 5
-  1132                           ; switch strategies available:
-  1133                           ; Name         Instructions Cycles
-  1134                           ; simple_byte           16     9 (average)
-  1135                           ; direct_byte           26    11 (fixed)
-  1136                           ; jumptable            263     9 (fixed)
-  1137                           ;	Chosen strategy is simple_byte
-  1138  0109  0875               	movf	semaforo_inicio@semaforo,w
-  1139  010A  3A01               	xorlw	1	; case 1
-  1140  010B  1903               	skipnz
-  1141  010C  28D9               	goto	l101
-  1142  010D  3A03               	xorlw	3	; case 2
-  1143  010E  1903               	skipnz
-  1144  010F  28EC               	goto	l103
-  1145  0110  3A01               	xorlw	1	; case 3
-  1146  0111  1903               	skipnz
-  1147  0112  28F2               	goto	l104
-  1148  0113  3A07               	xorlw	7	; case 4
-  1149  0114  1903               	skipnz
-  1150  0115  28F8               	goto	l105
-  1151  0116  3A01               	xorlw	1	; case 5
-  1152  0117  1903               	skipnz
-  1153  0118  28FE               	goto	l106
-  1154  0119  291A               	goto	l772
-  1155  011A                     l772:
-  1156                           
-  1157                           ;wenas_prueba_lab0.c: 311:     }
-  1158  011A  3001               	movlw	1
-  1159  011B  07F5               	addwf	semaforo_inicio@semaforo,f
-  1160  011C  1803               	skipnc
-  1161  011D  0AF6               	incf	semaforo_inicio@semaforo+1,f
-  1162  011E  3000               	movlw	0
-  1163  011F  07F6               	addwf	semaforo_inicio@semaforo+1,f
-  1164  0120                     l774:
-  1165  0120  0876               	movf	semaforo_inicio@semaforo+1,w
-  1166  0121  3A80               	xorlw	128
-  1167  0122  00FF               	movwf	btemp+1
-  1168  0123  3080               	movlw	128
-  1169  0124  027F               	subwf	btemp+1,w
-  1170  0125  1D03               	skipz
-  1171  0126  2929               	goto	u15
-  1172  0127  3006               	movlw	6
-  1173  0128  0275               	subwf	semaforo_inicio@semaforo,w
-  1174  0129                     u15:
-  1175  0129  1C03               	skipc
-  1176  012A  292C               	goto	u11
-  1177  012B  292D               	goto	u10
-  1178  012C                     u11:
-  1179  012C  2904               	goto	l770
-  1180  012D                     u10:
-  1181  012D                     l107:
-  1182  012D  0008               	return
-  1183  012E                     __end_of_semaforo_inicio:
-  1184                           
-  1185                           	psect	text3
-  1186  015E                     __ptext3:	
-  1187 ;; *************** function _semaforo_apagado *****************
-  1188 ;; Defined at:
-  1189 ;;		line 315 in file "wenas_prueba_lab0.c"
-  1190 ;; Parameters:    Size  Location     Type
-  1191 ;;		None
-  1192 ;; Auto vars:     Size  Location     Type
-  1193 ;;		None
-  1194 ;; Return value:  Size  Location     Type
-  1195 ;;                  1    wreg      void 
-  1196 ;; Registers used:
-  1197 ;;		None
-  1198 ;; Tracked objects:
-  1199 ;;		On entry : 0/0
-  1200 ;;		On exit  : 0/0
-  1201 ;;		Unchanged: 0/0
-  1202 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1203 ;;      Params:         0       0       0       0       0
-  1204 ;;      Locals:         0       0       0       0       0
-  1205 ;;      Temps:          0       0       0       0       0
-  1206 ;;      Totals:         0       0       0       0       0
-  1207 ;;Total ram usage:        0 bytes
-  1208 ;; Hardware stack levels used:    1
-  1209 ;; Hardware stack levels required when called:    1
-  1210 ;; This function calls:
-  1211 ;;		Nothing
-  1212 ;; This function is called by:
-  1213 ;;		_main
-  1214 ;; This function uses a non-reentrant model
-  1215 ;;
-  1216                           
+   889                           ; Switch size 1, requested type "simple"
+   890                           ; Number of cases is 1, Range of values is 0 to 0
+   891                           ; switch strategies available:
+   892                           ; Name         Instructions Cycles
+   893                           ; simple_byte            4     3 (average)
+   894                           ; direct_byte           11     8 (fixed)
+   895                           ; jumptable            260     6 (fixed)
+   896                           ;	Chosen strategy is simple_byte
+   897  0613  0874               	movf	semaforo_inicio@semaforo+1,w
+   898  0614  3A00               	xorlw	0	; case 0
+   899  0615  1903               	skipnz
+   900  0616  2E18               	goto	l953
+   901  0617  2E29               	goto	l785
+   902  0618                     l953:
+   903                           
+   904                           ; Switch size 1, requested type "simple"
+   905                           ; Number of cases is 5, Range of values is 1 to 5
+   906                           ; switch strategies available:
+   907                           ; Name         Instructions Cycles
+   908                           ; simple_byte           16     9 (average)
+   909                           ; direct_byte           26    11 (fixed)
+   910                           ; jumptable            263     9 (fixed)
+   911                           ;	Chosen strategy is simple_byte
+   912  0618  0873               	movf	semaforo_inicio@semaforo,w
+   913  0619  3A01               	xorlw	1	; case 1
+   914  061A  1903               	skipnz
+   915  061B  2DE8               	goto	l96
+   916  061C  3A03               	xorlw	3	; case 2
+   917  061D  1903               	skipnz
+   918  061E  2DFB               	goto	l98
+   919  061F  3A01               	xorlw	1	; case 3
+   920  0620  1903               	skipnz
+   921  0621  2E01               	goto	l99
+   922  0622  3A07               	xorlw	7	; case 4
+   923  0623  1903               	skipnz
+   924  0624  2E07               	goto	l100
+   925  0625  3A01               	xorlw	1	; case 5
+   926  0626  1903               	skipnz
+   927  0627  2E0D               	goto	l101
+   928  0628  2E29               	goto	l785
+   929  0629                     l785:
+   930                           
+   931                           ;wenas_prueba_lab0.c: 227:     }
+   932  0629  3001               	movlw	1
+   933  062A  07F3               	addwf	semaforo_inicio@semaforo,f
+   934  062B  1803               	skipnc
+   935  062C  0AF4               	incf	semaforo_inicio@semaforo+1,f
+   936  062D  3000               	movlw	0
+   937  062E  07F4               	addwf	semaforo_inicio@semaforo+1,f
+   938  062F                     l787:
+   939  062F  0874               	movf	semaforo_inicio@semaforo+1,w
+   940  0630  3A80               	xorlw	128
+   941  0631  00FF               	movwf	btemp+1
+   942  0632  3080               	movlw	128
+   943  0633  027F               	subwf	btemp+1,w
+   944  0634  1D03               	skipz
+   945  0635  2E38               	goto	u15
+   946  0636  3006               	movlw	6
+   947  0637  0273               	subwf	semaforo_inicio@semaforo,w
+   948  0638                     u15:
+   949  0638  1C03               	skipc
+   950  0639  2E3B               	goto	u11
+   951  063A  2E3C               	goto	u10
+   952  063B                     u11:
+   953  063B  2E13               	goto	l783
+   954  063C                     u10:
+   955  063C                     l102:
+   956  063C  0008               	return
+   957  063D                     __end_of_semaforo_inicio:
+   958                           
+   959                           	psect	text3
+   960  05B3                     __ptext3:	
+   961 ;; *************** function _semaforo_apagado *****************
+   962 ;; Defined at:
+   963 ;;		line 232 in file "wenas_prueba_lab0.c"
+   964 ;; Parameters:    Size  Location     Type
+   965 ;;		None
+   966 ;; Auto vars:     Size  Location     Type
+   967 ;;		None
+   968 ;; Return value:  Size  Location     Type
+   969 ;;                  1    wreg      void 
+   970 ;; Registers used:
+   971 ;;		None
+   972 ;; Tracked objects:
+   973 ;;		On entry : 0/0
+   974 ;;		On exit  : 0/0
+   975 ;;		Unchanged: 0/0
+   976 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   977 ;;      Params:         0       0       0       0       0
+   978 ;;      Locals:         0       0       0       0       0
+   979 ;;      Temps:          0       0       0       0       0
+   980 ;;      Totals:         0       0       0       0       0
+   981 ;;Total ram usage:        0 bytes
+   982 ;; Hardware stack levels used:    1
+   983 ;; This function calls:
+   984 ;;		Nothing
+   985 ;; This function is called by:
+   986 ;;		_main
+   987 ;; This function uses a non-reentrant model
+   988 ;;
+   989                           
+   990                           
+   991                           ;psect for function _semaforo_apagado
+   992  05B3                     _semaforo_apagado:
+   993  05B3                     l839:	
+   994                           ;incstack = 0
+   995                           ; Regs used in _semaforo_apagado: []
+   996                           
+   997                           
+   998                           ;wenas_prueba_lab0.c: 234:     PORTEbits.RE0=0;
+   999  05B3  1283               	bcf	3,5	;RP0=0, select bank0
+  1000  05B4  1303               	bcf	3,6	;RP1=0, select bank0
+  1001  05B5  1009               	bcf	9,0	;volatile
+  1002                           
+  1003                           ;wenas_prueba_lab0.c: 235:     PORTEbits.RE1=0;
+  1004  05B6  1089               	bcf	9,1	;volatile
+  1005                           
+  1006                           ;wenas_prueba_lab0.c: 236:     PORTEbits.RE2=0;
+  1007  05B7  1109               	bcf	9,2	;volatile
+  1008  05B8                     l105:	
+  1009                           ;wenas_prueba_lab0.c: 237:     return;
+  1010                           
+  1011  05B8  0008               	return
+  1012  05B9                     __end_of_semaforo_apagado:
+  1013                           
+  1014                           	psect	text4
+  1015  063D                     __ptext4:	
+  1016 ;; *************** function _cuenta_p2 *****************
+  1017 ;; Defined at:
+  1018 ;;		line 355 in file "wenas_prueba_lab0.c"
+  1019 ;; Parameters:    Size  Location     Type
+  1020 ;;		None
+  1021 ;; Auto vars:     Size  Location     Type
+  1022 ;;		None
+  1023 ;; Return value:  Size  Location     Type
+  1024 ;;                  1    wreg      void 
+  1025 ;; Registers used:
+  1026 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1027 ;; Tracked objects:
+  1028 ;;		On entry : 0/0
+  1029 ;;		On exit  : 0/0
+  1030 ;;		Unchanged: 0/0
+  1031 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1032 ;;      Params:         0       0       0       0       0
+  1033 ;;      Locals:         0       0       0       0       0
+  1034 ;;      Temps:          2       0       0       0       0
+  1035 ;;      Totals:         2       0       0       0       0
+  1036 ;;Total ram usage:        2 bytes
+  1037 ;; Hardware stack levels used:    1
+  1038 ;; This function calls:
+  1039 ;;		Nothing
+  1040 ;; This function is called by:
+  1041 ;;		_main
+  1042 ;; This function uses a non-reentrant model
+  1043 ;;
+  1044                           
+  1045                           
+  1046                           ;psect for function _cuenta_p2
+  1047  063D                     _cuenta_p2:
+  1048  063D                     l825:	
+  1049                           ;incstack = 0
+  1050                           ; Regs used in _cuenta_p2: [wreg-fsr0h+status,2+status,0]
+  1051                           
+  1052                           
+  1053                           ;wenas_prueba_lab0.c: 357:     switch(jugador2)
+  1054  063D  2EA5               	goto	l833
+  1055  063E                     l124:	
+  1056                           ;wenas_prueba_lab0.c: 358:     {;wenas_prueba_lab0.c: 359:         case(1):
+  1057                           
+  1058                           
+  1059                           ;wenas_prueba_lab0.c: 360:             PORTDbits.RD0=1;
+  1060  063E  1283               	bcf	3,5	;RP0=0, select bank0
+  1061  063F  1303               	bcf	3,6	;RP1=0, select bank0
+  1062  0640  1408               	bsf	8,0	;volatile
+  1063                           
+  1064                           ;wenas_prueba_lab0.c: 361:             PORTDbits.RD1=0;
+  1065  0641  1088               	bcf	8,1	;volatile
+  1066                           
+  1067                           ;wenas_prueba_lab0.c: 362:             PORTDbits.RD2=0;
+  1068  0642  1108               	bcf	8,2	;volatile
+  1069                           
+  1070                           ;wenas_prueba_lab0.c: 363:             PORTDbits.RD3=0;
+  1071  0643  1188               	bcf	8,3	;volatile
+  1072                           
+  1073                           ;wenas_prueba_lab0.c: 364:             PORTDbits.RD4=0;
+  1074  0644  1208               	bcf	8,4	;volatile
+  1075                           
+  1076                           ;wenas_prueba_lab0.c: 365:             PORTDbits.RD5=0;
+  1077  0645  1288               	bcf	8,5	;volatile
+  1078                           
+  1079                           ;wenas_prueba_lab0.c: 366:             PORTDbits.RD6=0;
+  1080  0646  1308               	bcf	8,6	;volatile
+  1081                           
+  1082                           ;wenas_prueba_lab0.c: 367:             PORTDbits.RD7=0;
+  1083  0647  1388               	bcf	8,7	;volatile
+  1084                           
+  1085                           ;wenas_prueba_lab0.c: 368:             break;
+  1086  0648  2ECD               	goto	l135
+  1087  0649                     l126:	
+  1088                           ;wenas_prueba_lab0.c: 369:         case(2):
+  1089                           
+  1090                           
+  1091                           ;wenas_prueba_lab0.c: 370:             PORTDbits.RD0=1;
+  1092  0649  1283               	bcf	3,5	;RP0=0, select bank0
+  1093  064A  1303               	bcf	3,6	;RP1=0, select bank0
+  1094  064B  1408               	bsf	8,0	;volatile
+  1095                           
+  1096                           ;wenas_prueba_lab0.c: 371:             PORTDbits.RD1=1;
+  1097  064C  1488               	bsf	8,1	;volatile
+  1098                           
+  1099                           ;wenas_prueba_lab0.c: 372:             PORTDbits.RD2=0;
+  1100  064D  1108               	bcf	8,2	;volatile
+  1101                           
+  1102                           ;wenas_prueba_lab0.c: 373:             PORTDbits.RD3=0;
+  1103  064E  1188               	bcf	8,3	;volatile
+  1104                           
+  1105                           ;wenas_prueba_lab0.c: 374:             PORTDbits.RD4=0;
+  1106  064F  1208               	bcf	8,4	;volatile
+  1107                           
+  1108                           ;wenas_prueba_lab0.c: 375:             PORTDbits.RD5=0;
+  1109  0650  1288               	bcf	8,5	;volatile
+  1110                           
+  1111                           ;wenas_prueba_lab0.c: 376:             PORTDbits.RD6=0;
+  1112  0651  1308               	bcf	8,6	;volatile
+  1113                           
+  1114                           ;wenas_prueba_lab0.c: 377:             PORTDbits.RD7=0;
+  1115  0652  1388               	bcf	8,7	;volatile
+  1116                           
+  1117                           ;wenas_prueba_lab0.c: 378:             break;
+  1118  0653  2ECD               	goto	l135
+  1119  0654                     l127:	
+  1120                           ;wenas_prueba_lab0.c: 379:         case(4):
+  1121                           
+  1122                           
+  1123                           ;wenas_prueba_lab0.c: 380:             PORTDbits.RD0=1;
+  1124  0654  1283               	bcf	3,5	;RP0=0, select bank0
+  1125  0655  1303               	bcf	3,6	;RP1=0, select bank0
+  1126  0656  1408               	bsf	8,0	;volatile
+  1127                           
+  1128                           ;wenas_prueba_lab0.c: 381:             PORTDbits.RD1=1;
+  1129  0657  1488               	bsf	8,1	;volatile
+  1130                           
+  1131                           ;wenas_prueba_lab0.c: 382:             PORTDbits.RD2=1;
+  1132  0658  1508               	bsf	8,2	;volatile
+  1133                           
+  1134                           ;wenas_prueba_lab0.c: 383:             PORTDbits.RD3=0;
+  1135  0659  1188               	bcf	8,3	;volatile
+  1136                           
+  1137                           ;wenas_prueba_lab0.c: 384:             PORTDbits.RD4=0;
+  1138  065A  1208               	bcf	8,4	;volatile
+  1139                           
+  1140                           ;wenas_prueba_lab0.c: 385:             PORTDbits.RD5=0;
+  1141  065B  1288               	bcf	8,5	;volatile
+  1142                           
+  1143                           ;wenas_prueba_lab0.c: 386:             PORTDbits.RD6=0;
+  1144  065C  1308               	bcf	8,6	;volatile
+  1145                           
+  1146                           ;wenas_prueba_lab0.c: 387:             PORTDbits.RD7=0;
+  1147  065D  1388               	bcf	8,7	;volatile
+  1148                           
+  1149                           ;wenas_prueba_lab0.c: 388:             break;
+  1150  065E  2ECD               	goto	l135
+  1151  065F                     l128:	
+  1152                           ;wenas_prueba_lab0.c: 389:         case(6):
+  1153                           
+  1154                           
+  1155                           ;wenas_prueba_lab0.c: 390:             PORTDbits.RD0=1;
+  1156  065F  1283               	bcf	3,5	;RP0=0, select bank0
+  1157  0660  1303               	bcf	3,6	;RP1=0, select bank0
+  1158  0661  1408               	bsf	8,0	;volatile
+  1159                           
+  1160                           ;wenas_prueba_lab0.c: 391:             PORTDbits.RD1=1;
+  1161  0662  1488               	bsf	8,1	;volatile
+  1162                           
+  1163                           ;wenas_prueba_lab0.c: 392:             PORTDbits.RD2=1;
+  1164  0663  1508               	bsf	8,2	;volatile
+  1165                           
+  1166                           ;wenas_prueba_lab0.c: 393:             PORTDbits.RD3=1;
+  1167  0664  1588               	bsf	8,3	;volatile
+  1168                           
+  1169                           ;wenas_prueba_lab0.c: 394:             PORTDbits.RD4=0;
+  1170  0665  1208               	bcf	8,4	;volatile
+  1171                           
+  1172                           ;wenas_prueba_lab0.c: 395:             PORTDbits.RD5=0;
+  1173  0666  1288               	bcf	8,5	;volatile
+  1174                           
+  1175                           ;wenas_prueba_lab0.c: 396:             PORTDbits.RD6=0;
+  1176  0667  1308               	bcf	8,6	;volatile
+  1177                           
+  1178                           ;wenas_prueba_lab0.c: 397:             PORTDbits.RD7=0;
+  1179  0668  1388               	bcf	8,7	;volatile
+  1180                           
+  1181                           ;wenas_prueba_lab0.c: 398:             break;
+  1182  0669  2ECD               	goto	l135
+  1183  066A                     l129:	
+  1184                           ;wenas_prueba_lab0.c: 399:         case(8):
+  1185                           
+  1186                           
+  1187                           ;wenas_prueba_lab0.c: 400:             PORTDbits.RD0=1;
+  1188  066A  1283               	bcf	3,5	;RP0=0, select bank0
+  1189  066B  1303               	bcf	3,6	;RP1=0, select bank0
+  1190  066C  1408               	bsf	8,0	;volatile
+  1191                           
+  1192                           ;wenas_prueba_lab0.c: 401:             PORTDbits.RD1=1;
+  1193  066D  1488               	bsf	8,1	;volatile
+  1194                           
+  1195                           ;wenas_prueba_lab0.c: 402:             PORTDbits.RD2=1;
+  1196  066E  1508               	bsf	8,2	;volatile
+  1197                           
+  1198                           ;wenas_prueba_lab0.c: 403:             PORTDbits.RD3=1;
+  1199  066F  1588               	bsf	8,3	;volatile
+  1200                           
+  1201                           ;wenas_prueba_lab0.c: 404:             PORTDbits.RD4=1;
+  1202  0670  1608               	bsf	8,4	;volatile
+  1203                           
+  1204                           ;wenas_prueba_lab0.c: 405:             PORTDbits.RD5=0;
+  1205  0671  1288               	bcf	8,5	;volatile
+  1206                           
+  1207                           ;wenas_prueba_lab0.c: 406:             PORTDbits.RD6=0;
+  1208  0672  1308               	bcf	8,6	;volatile
+  1209                           
+  1210                           ;wenas_prueba_lab0.c: 407:             PORTDbits.RD7=0;
+  1211  0673  1388               	bcf	8,7	;volatile
+  1212                           
+  1213                           ;wenas_prueba_lab0.c: 408:             break;
+  1214  0674  2ECD               	goto	l135
+  1215  0675                     l130:	
+  1216                           ;wenas_prueba_lab0.c: 409:         case(10):
   1217                           
-  1218                           ;psect for function _semaforo_apagado
-  1219  015E                     _semaforo_apagado:
-  1220  015E                     l780:	
-  1221                           ;incstack = 0
-  1222                           ; Regs used in _semaforo_apagado: []
+  1218                           
+  1219                           ;wenas_prueba_lab0.c: 410:             PORTDbits.RD0=1;
+  1220  0675  1283               	bcf	3,5	;RP0=0, select bank0
+  1221  0676  1303               	bcf	3,6	;RP1=0, select bank0
+  1222  0677  1408               	bsf	8,0	;volatile
   1223                           
-  1224                           
-  1225                           ;wenas_prueba_lab0.c: 317:     PORTEbits.RE0=0;
-  1226  015E  1283               	bcf	3,5	;RP0=0, select bank0
-  1227  015F  1303               	bcf	3,6	;RP1=0, select bank0
-  1228  0160  1009               	bcf	9,0	;volatile
+  1224                           ;wenas_prueba_lab0.c: 411:             PORTDbits.RD1=1;
+  1225  0678  1488               	bsf	8,1	;volatile
+  1226                           
+  1227                           ;wenas_prueba_lab0.c: 412:             PORTDbits.RD2=1;
+  1228  0679  1508               	bsf	8,2	;volatile
   1229                           
-  1230                           ;wenas_prueba_lab0.c: 318:     PORTEbits.RE1=0;
-  1231  0161  1089               	bcf	9,1	;volatile
+  1230                           ;wenas_prueba_lab0.c: 413:             PORTDbits.RD3=1;
+  1231  067A  1588               	bsf	8,3	;volatile
   1232                           
-  1233                           ;wenas_prueba_lab0.c: 319:     PORTEbits.RE2=0;
-  1234  0162  1109               	bcf	9,2	;volatile
-  1235  0163                     l110:
-  1236  0163  0008               	return
-  1237  0164                     __end_of_semaforo_apagado:
+  1233                           ;wenas_prueba_lab0.c: 414:             PORTDbits.RD4=1;
+  1234  067B  1608               	bsf	8,4	;volatile
+  1235                           
+  1236                           ;wenas_prueba_lab0.c: 415:             PORTDbits.RD5=1;
+  1237  067C  1688               	bsf	8,5	;volatile
   1238                           
-  1239                           	psect	text4
-  1240  0157                     __ptext4:	
-  1241 ;; *************** function _isr *****************
-  1242 ;; Defined at:
-  1243 ;;		line 64 in file "wenas_prueba_lab0.c"
-  1244 ;; Parameters:    Size  Location     Type
-  1245 ;;		None
-  1246 ;; Auto vars:     Size  Location     Type
-  1247 ;;		None
-  1248 ;; Return value:  Size  Location     Type
-  1249 ;;                  1    wreg      void 
-  1250 ;; Registers used:
-  1251 ;;		None
-  1252 ;; Tracked objects:
-  1253 ;;		On entry : 0/0
-  1254 ;;		On exit  : 0/0
-  1255 ;;		Unchanged: 0/0
-  1256 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1257 ;;      Params:         0       0       0       0       0
-  1258 ;;      Locals:         0       0       0       0       0
-  1259 ;;      Temps:          2       0       0       0       0
-  1260 ;;      Totals:         2       0       0       0       0
-  1261 ;;Total ram usage:        2 bytes
-  1262 ;; Hardware stack levels used:    1
-  1263 ;; This function calls:
-  1264 ;;		Nothing
-  1265 ;; This function is called by:
-  1266 ;;		Interrupt level 1
-  1267 ;; This function uses a non-reentrant model
-  1268 ;;
-  1269                           
+  1239                           ;wenas_prueba_lab0.c: 416:             PORTDbits.RD6=0;
+  1240  067D  1308               	bcf	8,6	;volatile
+  1241                           
+  1242                           ;wenas_prueba_lab0.c: 417:             PORTDbits.RD7=0;
+  1243  067E  1388               	bcf	8,7	;volatile
+  1244                           
+  1245                           ;wenas_prueba_lab0.c: 418:             break;
+  1246  067F  2ECD               	goto	l135
+  1247  0680                     l131:	
+  1248                           ;wenas_prueba_lab0.c: 419:         case(12):
+  1249                           
+  1250                           
+  1251                           ;wenas_prueba_lab0.c: 420:             PORTDbits.RD0=1;
+  1252  0680  1283               	bcf	3,5	;RP0=0, select bank0
+  1253  0681  1303               	bcf	3,6	;RP1=0, select bank0
+  1254  0682  1408               	bsf	8,0	;volatile
+  1255                           
+  1256                           ;wenas_prueba_lab0.c: 421:             PORTDbits.RD1=1;
+  1257  0683  1488               	bsf	8,1	;volatile
+  1258                           
+  1259                           ;wenas_prueba_lab0.c: 422:             PORTDbits.RD2=1;
+  1260  0684  1508               	bsf	8,2	;volatile
+  1261                           
+  1262                           ;wenas_prueba_lab0.c: 423:             PORTDbits.RD3=1;
+  1263  0685  1588               	bsf	8,3	;volatile
+  1264                           
+  1265                           ;wenas_prueba_lab0.c: 424:             PORTDbits.RD4=1;
+  1266  0686  1608               	bsf	8,4	;volatile
+  1267                           
+  1268                           ;wenas_prueba_lab0.c: 425:             PORTDbits.RD5=1;
+  1269  0687  1688               	bsf	8,5	;volatile
   1270                           
-  1271                           ;psect for function _isr
-  1272  0157                     _isr:
-  1273  0157                     i1l67:
-  1274  0157  0871               	movf	??_isr+1,w
-  1275  0158  008A               	movwf	10
-  1276  0159  0E70               	swapf	??_isr,w
-  1277  015A  0083               	movwf	3
-  1278  015B  0EFE               	swapf	btemp,f
-  1279  015C  0E7E               	swapf	btemp,w
-  1280  015D  0009               	retfie
-  1281  015E                     __end_of_isr:
-  1282  007E                     btemp	set	126	;btemp
-  1283  007E                     wtemp0	set	126
-  1284                           
-  1285                           	psect	intentry
-  1286  0004                     __pintentry:	
-  1287                           ;incstack = 0
-  1288                           ; Regs used in _isr: []
-  1289                           
-  1290  0004                     interrupt_function:
-  1291  007E                     saved_w	set	btemp
-  1292  0004  00FE               	movwf	btemp
-  1293  0005  0E03               	swapf	3,w
-  1294  0006  00F0               	movwf	??_isr
-  1295  0007  080A               	movf	10,w
-  1296  0008  00F1               	movwf	??_isr+1
-  1297  0009  120A  118A  2957   	ljmp	_isr
-  1298                           
-  1299                           	psect	config
-  1300                           
-  1301                           ;Config register CONFIG1 @ 0x2007
-  1302                           ;	Oscillator Selection bits
-  1303                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+  1271                           ;wenas_prueba_lab0.c: 426:             PORTDbits.RD6=1;
+  1272  0688  1708               	bsf	8,6	;volatile
+  1273                           
+  1274                           ;wenas_prueba_lab0.c: 427:             PORTDbits.RD7=0;
+  1275  0689  1388               	bcf	8,7	;volatile
+  1276                           
+  1277                           ;wenas_prueba_lab0.c: 428:             break;
+  1278  068A  2ECD               	goto	l135
+  1279  068B                     l132:	
+  1280                           ;wenas_prueba_lab0.c: 429:         case(14):
+  1281                           
+  1282                           
+  1283                           ;wenas_prueba_lab0.c: 430:             PORTDbits.RD0=1;
+  1284  068B  1283               	bcf	3,5	;RP0=0, select bank0
+  1285  068C  1303               	bcf	3,6	;RP1=0, select bank0
+  1286  068D  1408               	bsf	8,0	;volatile
+  1287                           
+  1288                           ;wenas_prueba_lab0.c: 431:             PORTDbits.RD1=1;
+  1289  068E  1488               	bsf	8,1	;volatile
+  1290                           
+  1291                           ;wenas_prueba_lab0.c: 432:             PORTDbits.RD2=1;
+  1292  068F  1508               	bsf	8,2	;volatile
+  1293                           
+  1294                           ;wenas_prueba_lab0.c: 433:             PORTDbits.RD3=1;
+  1295  0690  1588               	bsf	8,3	;volatile
+  1296                           
+  1297                           ;wenas_prueba_lab0.c: 434:             PORTDbits.RD4=1;
+  1298  0691  1608               	bsf	8,4	;volatile
+  1299                           
+  1300                           ;wenas_prueba_lab0.c: 435:             PORTDbits.RD5=1;
+  1301  0692  1688               	bsf	8,5	;volatile
+  1302                           
+  1303                           ;wenas_prueba_lab0.c: 436:             PORTDbits.RD6=1;
+  1304  0693  1708               	bsf	8,6	;volatile
+  1305                           
+  1306                           ;wenas_prueba_lab0.c: 437:             PORTDbits.RD7=1;
+  1307  0694  1788               	bsf	8,7	;volatile
+  1308                           
+  1309                           ;wenas_prueba_lab0.c: 438:             break;
+  1310  0695  2ECD               	goto	l135
+  1311  0696                     l133:	
+  1312                           ;wenas_prueba_lab0.c: 439:         case(16):
+  1313                           
+  1314                           
+  1315                           ;wenas_prueba_lab0.c: 440:             PORTDbits.RD0=0;
+  1316  0696  1283               	bcf	3,5	;RP0=0, select bank0
+  1317  0697  1303               	bcf	3,6	;RP1=0, select bank0
+  1318  0698  1008               	bcf	8,0	;volatile
+  1319                           
+  1320                           ;wenas_prueba_lab0.c: 441:             PORTDbits.RD1=0;
+  1321  0699  1088               	bcf	8,1	;volatile
+  1322                           
+  1323                           ;wenas_prueba_lab0.c: 442:             PORTDbits.RD2=0;
+  1324  069A  1108               	bcf	8,2	;volatile
+  1325                           
+  1326                           ;wenas_prueba_lab0.c: 443:             PORTDbits.RD3=0;
+  1327  069B  1188               	bcf	8,3	;volatile
+  1328                           
+  1329                           ;wenas_prueba_lab0.c: 444:             PORTDbits.RD4=0;
+  1330  069C  1208               	bcf	8,4	;volatile
+  1331                           
+  1332                           ;wenas_prueba_lab0.c: 445:             PORTDbits.RD5=0;
+  1333  069D  1288               	bcf	8,5	;volatile
+  1334                           
+  1335                           ;wenas_prueba_lab0.c: 446:             PORTDbits.RD6=0;
+  1336  069E  1308               	bcf	8,6	;volatile
+  1337                           
+  1338                           ;wenas_prueba_lab0.c: 447:             PORTDbits.RD7=0;
+  1339  069F  1388               	bcf	8,7	;volatile
+  1340  06A0                     l827:
+  1341                           
+  1342                           ;wenas_prueba_lab0.c: 448:             PORTA=0b11011010;
+  1343  06A0  30DA               	movlw	218
+  1344  06A1  0085               	movwf	5	;volatile
+  1345                           
+  1346                           ;wenas_prueba_lab0.c: 449:             break;
+  1347  06A2  2ECD               	goto	l135
+  1348  06A3                     l829:
+  1349                           
+  1350                           ;wenas_prueba_lab0.c: 452:             jugador2=0;
+  1351  06A3  01F8               	clrf	_jugador2
+  1352                           
+  1353                           ;wenas_prueba_lab0.c: 453:             break;
+  1354  06A4  2ECD               	goto	l135
+  1355  06A5                     l833:
+  1356  06A5  0878               	movf	_jugador2,w
+  1357  06A6  00F0               	movwf	??_cuenta_p2
+  1358  06A7  01F1               	clrf	??_cuenta_p2+1
+  1359                           
+  1360                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  1361                           ; Switch size 1, requested type "simple"
+  1362                           ; Number of cases is 1, Range of values is 0 to 0
+  1363                           ; switch strategies available:
+  1364                           ; Name         Instructions Cycles
+  1365                           ; simple_byte            4     3 (average)
+  1366                           ; direct_byte           11     8 (fixed)
+  1367                           ; jumptable            260     6 (fixed)
+  1368                           ;	Chosen strategy is simple_byte
+  1369  06A8  0871               	movf	??_cuenta_p2+1,w
+  1370  06A9  3A00               	xorlw	0	; case 0
+  1371  06AA  1903               	skipnz
+  1372  06AB  2EAD               	goto	l955
+  1373  06AC  2ECD               	goto	l135
+  1374  06AD                     l955:
+  1375                           
+  1376                           ; Switch size 1, requested type "simple"
+  1377                           ; Number of cases is 10, Range of values is 1 to 18
+  1378                           ; switch strategies available:
+  1379                           ; Name         Instructions Cycles
+  1380                           ; simple_byte           31    16 (average)
+  1381                           ; direct_byte           65    11 (fixed)
+  1382                           ; jumptable            263     9 (fixed)
+  1383                           ;	Chosen strategy is simple_byte
+  1384  06AD  0870               	movf	??_cuenta_p2,w
+  1385  06AE  3A01               	xorlw	1	; case 1
+  1386  06AF  1903               	skipnz
+  1387  06B0  2E3E               	goto	l124
+  1388  06B1  3A03               	xorlw	3	; case 2
+  1389  06B2  1903               	skipnz
+  1390  06B3  2E49               	goto	l126
+  1391  06B4  3A06               	xorlw	6	; case 4
+  1392  06B5  1903               	skipnz
+  1393  06B6  2E54               	goto	l127
+  1394  06B7  3A02               	xorlw	2	; case 6
+  1395  06B8  1903               	skipnz
+  1396  06B9  2E5F               	goto	l128
+  1397  06BA  3A0E               	xorlw	14	; case 8
+  1398  06BB  1903               	skipnz
+  1399  06BC  2E6A               	goto	l129
+  1400  06BD  3A02               	xorlw	2	; case 10
+  1401  06BE  1903               	skipnz
+  1402  06BF  2E75               	goto	l130
+  1403  06C0  3A06               	xorlw	6	; case 12
+  1404  06C1  1903               	skipnz
+  1405  06C2  2E80               	goto	l131
+  1406  06C3  3A02               	xorlw	2	; case 14
+  1407  06C4  1903               	skipnz
+  1408  06C5  2E8B               	goto	l132
+  1409  06C6  3A1E               	xorlw	30	; case 16
+  1410  06C7  1903               	skipnz
+  1411  06C8  2E96               	goto	l133
+  1412  06C9  3A02               	xorlw	2	; case 18
+  1413  06CA  1903               	skipnz
+  1414  06CB  2EA3               	goto	l829
+  1415  06CC  2ECD               	goto	l135
+  1416  06CD                     l135:
+  1417  06CD  0008               	return
+  1418  06CE                     __end_of_cuenta_p2:
+  1419                           
+  1420                           	psect	text5
+  1421  06CE                     __ptext5:	
+  1422 ;; *************** function _cuenta_p1 *****************
+  1423 ;; Defined at:
+  1424 ;;		line 241 in file "wenas_prueba_lab0.c"
+  1425 ;; Parameters:    Size  Location     Type
+  1426 ;;		None
+  1427 ;; Auto vars:     Size  Location     Type
+  1428 ;;		None
+  1429 ;; Return value:  Size  Location     Type
+  1430 ;;                  1    wreg      void 
+  1431 ;; Registers used:
+  1432 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1433 ;; Tracked objects:
+  1434 ;;		On entry : 0/0
+  1435 ;;		On exit  : 0/0
+  1436 ;;		Unchanged: 0/0
+  1437 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1438 ;;      Params:         0       0       0       0       0
+  1439 ;;      Locals:         0       0       0       0       0
+  1440 ;;      Temps:          2       0       0       0       0
+  1441 ;;      Totals:         2       0       0       0       0
+  1442 ;;Total ram usage:        2 bytes
+  1443 ;; Hardware stack levels used:    1
+  1444 ;; This function calls:
+  1445 ;;		Nothing
+  1446 ;; This function is called by:
+  1447 ;;		_main
+  1448 ;; This function uses a non-reentrant model
+  1449 ;;
+  1450                           
+  1451                           
+  1452                           ;psect for function _cuenta_p1
+  1453  06CE                     _cuenta_p1:
+  1454  06CE                     l793:	
+  1455                           ;incstack = 0
+  1456                           ; Regs used in _cuenta_p1: [wreg-fsr0h+status,2+status,0]
+  1457                           
+  1458                           
+  1459                           ;wenas_prueba_lab0.c: 243:     switch(jugador1)
+  1460  06CE  2F37               	goto	l819
+  1461  06CF                     l109:	
+  1462                           ;wenas_prueba_lab0.c: 244:     {;wenas_prueba_lab0.c: 245:         case(1):
+  1463                           
+  1464                           
+  1465                           ;wenas_prueba_lab0.c: 246:             PORTCbits.RC0=1;
+  1466  06CF  1283               	bcf	3,5	;RP0=0, select bank0
+  1467  06D0  1303               	bcf	3,6	;RP1=0, select bank0
+  1468  06D1  1407               	bsf	7,0	;volatile
+  1469                           
+  1470                           ;wenas_prueba_lab0.c: 247:             PORTCbits.RC1=0;
+  1471  06D2  1087               	bcf	7,1	;volatile
+  1472                           
+  1473                           ;wenas_prueba_lab0.c: 248:             PORTCbits.RC2=0;
+  1474  06D3  1107               	bcf	7,2	;volatile
+  1475                           
+  1476                           ;wenas_prueba_lab0.c: 249:             PORTCbits.RC3=0;
+  1477  06D4  1187               	bcf	7,3	;volatile
+  1478                           
+  1479                           ;wenas_prueba_lab0.c: 250:             PORTCbits.RC4=0;
+  1480  06D5  1207               	bcf	7,4	;volatile
+  1481                           
+  1482                           ;wenas_prueba_lab0.c: 251:             PORTCbits.RC5=0;
+  1483  06D6  1287               	bcf	7,5	;volatile
+  1484                           
+  1485                           ;wenas_prueba_lab0.c: 252:             PORTCbits.RC6=0;
+  1486  06D7  1307               	bcf	7,6	;volatile
+  1487                           
+  1488                           ;wenas_prueba_lab0.c: 253:             PORTCbits.RC7=0;
+  1489  06D8  1387               	bcf	7,7	;volatile
+  1490                           
+  1491                           ;wenas_prueba_lab0.c: 254:             break;
+  1492  06D9  2F5F               	goto	l120
+  1493  06DA                     l111:	
+  1494                           ;wenas_prueba_lab0.c: 256:         case(2):
+  1495                           
+  1496                           
+  1497                           ;wenas_prueba_lab0.c: 257:             PORTCbits.RC0=1;
+  1498  06DA  1283               	bcf	3,5	;RP0=0, select bank0
+  1499  06DB  1303               	bcf	3,6	;RP1=0, select bank0
+  1500  06DC  1407               	bsf	7,0	;volatile
+  1501                           
+  1502                           ;wenas_prueba_lab0.c: 258:             PORTCbits.RC1=1;
+  1503  06DD  1487               	bsf	7,1	;volatile
+  1504                           
+  1505                           ;wenas_prueba_lab0.c: 259:             PORTCbits.RC2=0;
+  1506  06DE  1107               	bcf	7,2	;volatile
+  1507                           
+  1508                           ;wenas_prueba_lab0.c: 260:             PORTCbits.RC3=0;
+  1509  06DF  1187               	bcf	7,3	;volatile
+  1510                           
+  1511                           ;wenas_prueba_lab0.c: 261:             PORTCbits.RC4=0;
+  1512  06E0  1207               	bcf	7,4	;volatile
+  1513                           
+  1514                           ;wenas_prueba_lab0.c: 262:             PORTCbits.RC5=0;
+  1515  06E1  1287               	bcf	7,5	;volatile
+  1516                           
+  1517                           ;wenas_prueba_lab0.c: 263:             PORTCbits.RC6=0;
+  1518  06E2  1307               	bcf	7,6	;volatile
+  1519                           
+  1520                           ;wenas_prueba_lab0.c: 264:             PORTCbits.RC7=0;
+  1521  06E3  1387               	bcf	7,7	;volatile
+  1522                           
+  1523                           ;wenas_prueba_lab0.c: 265:             break;
+  1524  06E4  2F5F               	goto	l120
+  1525  06E5                     l112:	
+  1526                           ;wenas_prueba_lab0.c: 267:         case(4):
+  1527                           
+  1528                           
+  1529                           ;wenas_prueba_lab0.c: 268:             PORTCbits.RC0=1;
+  1530  06E5  1283               	bcf	3,5	;RP0=0, select bank0
+  1531  06E6  1303               	bcf	3,6	;RP1=0, select bank0
+  1532  06E7  1407               	bsf	7,0	;volatile
+  1533                           
+  1534                           ;wenas_prueba_lab0.c: 269:             PORTCbits.RC1=1;
+  1535  06E8  1487               	bsf	7,1	;volatile
+  1536                           
+  1537                           ;wenas_prueba_lab0.c: 270:             PORTCbits.RC2=1;
+  1538  06E9  1507               	bsf	7,2	;volatile
+  1539                           
+  1540                           ;wenas_prueba_lab0.c: 271:             PORTCbits.RC3=0;
+  1541  06EA  1187               	bcf	7,3	;volatile
+  1542                           
+  1543                           ;wenas_prueba_lab0.c: 272:             PORTCbits.RC4=0;
+  1544  06EB  1207               	bcf	7,4	;volatile
+  1545                           
+  1546                           ;wenas_prueba_lab0.c: 273:             PORTCbits.RC5=0;
+  1547  06EC  1287               	bcf	7,5	;volatile
+  1548                           
+  1549                           ;wenas_prueba_lab0.c: 274:             PORTCbits.RC6=0;
+  1550  06ED  1307               	bcf	7,6	;volatile
+  1551                           
+  1552                           ;wenas_prueba_lab0.c: 275:             PORTCbits.RC7=0;
+  1553  06EE  1387               	bcf	7,7	;volatile
+  1554                           
+  1555                           ;wenas_prueba_lab0.c: 276:             break;
+  1556  06EF  2F5F               	goto	l120
+  1557  06F0                     l113:	
+  1558                           ;wenas_prueba_lab0.c: 278:         case(6):
+  1559                           
+  1560                           
+  1561                           ;wenas_prueba_lab0.c: 279:             PORTCbits.RC0=1;
+  1562  06F0  1283               	bcf	3,5	;RP0=0, select bank0
+  1563  06F1  1303               	bcf	3,6	;RP1=0, select bank0
+  1564  06F2  1407               	bsf	7,0	;volatile
+  1565                           
+  1566                           ;wenas_prueba_lab0.c: 280:             PORTCbits.RC1=1;
+  1567  06F3  1487               	bsf	7,1	;volatile
+  1568                           
+  1569                           ;wenas_prueba_lab0.c: 281:             PORTCbits.RC2=1;
+  1570  06F4  1507               	bsf	7,2	;volatile
+  1571                           
+  1572                           ;wenas_prueba_lab0.c: 282:             PORTCbits.RC3=1;
+  1573  06F5  1587               	bsf	7,3	;volatile
+  1574                           
+  1575                           ;wenas_prueba_lab0.c: 283:             PORTCbits.RC4=0;
+  1576  06F6  1207               	bcf	7,4	;volatile
+  1577                           
+  1578                           ;wenas_prueba_lab0.c: 284:             PORTCbits.RC5=0;
+  1579  06F7  1287               	bcf	7,5	;volatile
+  1580                           
+  1581                           ;wenas_prueba_lab0.c: 285:             PORTCbits.RC6=0;
+  1582  06F8  1307               	bcf	7,6	;volatile
+  1583                           
+  1584                           ;wenas_prueba_lab0.c: 286:             PORTCbits.RC7=0;
+  1585  06F9  1387               	bcf	7,7	;volatile
+  1586                           
+  1587                           ;wenas_prueba_lab0.c: 287:             break;
+  1588  06FA  2F5F               	goto	l120
+  1589  06FB                     l114:	
+  1590                           ;wenas_prueba_lab0.c: 289:         case(8):
+  1591                           
+  1592                           
+  1593                           ;wenas_prueba_lab0.c: 290:             PORTCbits.RC0=1;
+  1594  06FB  1283               	bcf	3,5	;RP0=0, select bank0
+  1595  06FC  1303               	bcf	3,6	;RP1=0, select bank0
+  1596  06FD  1407               	bsf	7,0	;volatile
+  1597                           
+  1598                           ;wenas_prueba_lab0.c: 291:             PORTCbits.RC1=1;
+  1599  06FE  1487               	bsf	7,1	;volatile
+  1600                           
+  1601                           ;wenas_prueba_lab0.c: 292:             PORTCbits.RC2=1;
+  1602  06FF  1507               	bsf	7,2	;volatile
+  1603                           
+  1604                           ;wenas_prueba_lab0.c: 293:             PORTCbits.RC3=1;
+  1605  0700  1587               	bsf	7,3	;volatile
+  1606                           
+  1607                           ;wenas_prueba_lab0.c: 294:             PORTCbits.RC4=1;
+  1608  0701  1607               	bsf	7,4	;volatile
+  1609                           
+  1610                           ;wenas_prueba_lab0.c: 295:             PORTCbits.RC5=0;
+  1611  0702  1287               	bcf	7,5	;volatile
+  1612                           
+  1613                           ;wenas_prueba_lab0.c: 296:             PORTCbits.RC6=0;
+  1614  0703  1307               	bcf	7,6	;volatile
+  1615                           
+  1616                           ;wenas_prueba_lab0.c: 297:             PORTCbits.RC7=0;
+  1617  0704  1387               	bcf	7,7	;volatile
+  1618                           
+  1619                           ;wenas_prueba_lab0.c: 298:             break;
+  1620  0705  2F5F               	goto	l120
+  1621  0706                     l115:	
+  1622                           ;wenas_prueba_lab0.c: 300:         case(10):
+  1623                           
+  1624                           
+  1625                           ;wenas_prueba_lab0.c: 301:             PORTCbits.RC0=1;
+  1626  0706  1283               	bcf	3,5	;RP0=0, select bank0
+  1627  0707  1303               	bcf	3,6	;RP1=0, select bank0
+  1628  0708  1407               	bsf	7,0	;volatile
+  1629                           
+  1630                           ;wenas_prueba_lab0.c: 302:             PORTCbits.RC1=1;
+  1631  0709  1487               	bsf	7,1	;volatile
+  1632                           
+  1633                           ;wenas_prueba_lab0.c: 303:             PORTCbits.RC2=1;
+  1634  070A  1507               	bsf	7,2	;volatile
+  1635                           
+  1636                           ;wenas_prueba_lab0.c: 304:             PORTCbits.RC3=1;
+  1637  070B  1587               	bsf	7,3	;volatile
+  1638                           
+  1639                           ;wenas_prueba_lab0.c: 305:             PORTCbits.RC4=1;
+  1640  070C  1607               	bsf	7,4	;volatile
+  1641                           
+  1642                           ;wenas_prueba_lab0.c: 306:             PORTCbits.RC5=1;
+  1643  070D  1687               	bsf	7,5	;volatile
+  1644                           
+  1645                           ;wenas_prueba_lab0.c: 307:             PORTCbits.RC6=0;
+  1646  070E  1307               	bcf	7,6	;volatile
+  1647                           
+  1648                           ;wenas_prueba_lab0.c: 308:             PORTCbits.RC7=0;
+  1649  070F  1387               	bcf	7,7	;volatile
+  1650                           
+  1651                           ;wenas_prueba_lab0.c: 309:             break;
+  1652  0710  2F5F               	goto	l120
+  1653  0711                     l116:	
+  1654                           ;wenas_prueba_lab0.c: 311:         case(12):
+  1655                           
+  1656                           
+  1657                           ;wenas_prueba_lab0.c: 312:             PORTCbits.RC0=1;
+  1658  0711  1283               	bcf	3,5	;RP0=0, select bank0
+  1659  0712  1303               	bcf	3,6	;RP1=0, select bank0
+  1660  0713  1407               	bsf	7,0	;volatile
+  1661                           
+  1662                           ;wenas_prueba_lab0.c: 313:             PORTCbits.RC1=1;
+  1663  0714  1487               	bsf	7,1	;volatile
+  1664                           
+  1665                           ;wenas_prueba_lab0.c: 314:             PORTCbits.RC2=1;
+  1666  0715  1507               	bsf	7,2	;volatile
+  1667                           
+  1668                           ;wenas_prueba_lab0.c: 315:             PORTCbits.RC3=1;
+  1669  0716  1587               	bsf	7,3	;volatile
+  1670                           
+  1671                           ;wenas_prueba_lab0.c: 316:             PORTCbits.RC4=1;
+  1672  0717  1607               	bsf	7,4	;volatile
+  1673                           
+  1674                           ;wenas_prueba_lab0.c: 317:             PORTCbits.RC5=1;
+  1675  0718  1687               	bsf	7,5	;volatile
+  1676                           
+  1677                           ;wenas_prueba_lab0.c: 318:             PORTCbits.RC6=1;
+  1678  0719  1707               	bsf	7,6	;volatile
+  1679                           
+  1680                           ;wenas_prueba_lab0.c: 319:             PORTCbits.RC7=0;
+  1681  071A  1387               	bcf	7,7	;volatile
+  1682                           
+  1683                           ;wenas_prueba_lab0.c: 320:             break;
+  1684  071B  2F5F               	goto	l120
+  1685  071C                     l117:	
+  1686                           ;wenas_prueba_lab0.c: 322:         case(14):
+  1687                           
+  1688                           
+  1689                           ;wenas_prueba_lab0.c: 323:             PORTCbits.RC0=1;
+  1690  071C  1283               	bcf	3,5	;RP0=0, select bank0
+  1691  071D  1303               	bcf	3,6	;RP1=0, select bank0
+  1692  071E  1407               	bsf	7,0	;volatile
+  1693                           
+  1694                           ;wenas_prueba_lab0.c: 324:             PORTCbits.RC1=1;
+  1695  071F  1487               	bsf	7,1	;volatile
+  1696                           
+  1697                           ;wenas_prueba_lab0.c: 325:             PORTCbits.RC2=1;
+  1698  0720  1507               	bsf	7,2	;volatile
+  1699                           
+  1700                           ;wenas_prueba_lab0.c: 326:             PORTCbits.RC3=1;
+  1701  0721  1587               	bsf	7,3	;volatile
+  1702                           
+  1703                           ;wenas_prueba_lab0.c: 327:             PORTCbits.RC4=1;
+  1704  0722  1607               	bsf	7,4	;volatile
+  1705                           
+  1706                           ;wenas_prueba_lab0.c: 328:             PORTCbits.RC5=1;
+  1707  0723  1687               	bsf	7,5	;volatile
+  1708                           
+  1709                           ;wenas_prueba_lab0.c: 329:             PORTCbits.RC6=1;
+  1710  0724  1707               	bsf	7,6	;volatile
+  1711                           
+  1712                           ;wenas_prueba_lab0.c: 330:             PORTCbits.RC7=1;
+  1713  0725  1787               	bsf	7,7	;volatile
+  1714                           
+  1715                           ;wenas_prueba_lab0.c: 331:             break;
+  1716  0726  2F5F               	goto	l120
+  1717  0727                     l795:
+  1718                           
+  1719                           ;wenas_prueba_lab0.c: 334:             jugador1=0;
+  1720  0727  01F9               	clrf	_jugador1
+  1721  0728                     l797:
+  1722                           
+  1723                           ;wenas_prueba_lab0.c: 335:             PORTCbits.RC0=0;
+  1724  0728  1283               	bcf	3,5	;RP0=0, select bank0
+  1725  0729  1303               	bcf	3,6	;RP1=0, select bank0
+  1726  072A  1007               	bcf	7,0	;volatile
+  1727  072B                     l799:
+  1728                           
+  1729                           ;wenas_prueba_lab0.c: 336:             PORTCbits.RC1=0;
+  1730  072B  1087               	bcf	7,1	;volatile
+  1731  072C                     l801:
+  1732                           
+  1733                           ;wenas_prueba_lab0.c: 337:             PORTCbits.RC2=0;
+  1734  072C  1107               	bcf	7,2	;volatile
+  1735  072D                     l803:
+  1736                           
+  1737                           ;wenas_prueba_lab0.c: 338:             PORTCbits.RC3=0;
+  1738  072D  1187               	bcf	7,3	;volatile
+  1739  072E                     l805:
+  1740                           
+  1741                           ;wenas_prueba_lab0.c: 339:             PORTCbits.RC4=0;
+  1742  072E  1207               	bcf	7,4	;volatile
+  1743  072F                     l807:
+  1744                           
+  1745                           ;wenas_prueba_lab0.c: 340:             PORTCbits.RC5=0;
+  1746  072F  1287               	bcf	7,5	;volatile
+  1747  0730                     l809:
+  1748                           
+  1749                           ;wenas_prueba_lab0.c: 341:             PORTCbits.RC6=0;
+  1750  0730  1307               	bcf	7,6	;volatile
+  1751  0731                     l811:
+  1752                           
+  1753                           ;wenas_prueba_lab0.c: 342:             PORTCbits.RC7=0;
+  1754  0731  1387               	bcf	7,7	;volatile
+  1755  0732                     l813:
+  1756                           
+  1757                           ;wenas_prueba_lab0.c: 343:             PORTA=0b00001100;
+  1758  0732  300C               	movlw	12
+  1759  0733  0085               	movwf	5	;volatile
+  1760                           
+  1761                           ;wenas_prueba_lab0.c: 344:             break;
+  1762  0734  2F5F               	goto	l120
+  1763  0735                     l815:
+  1764                           
+  1765                           ;wenas_prueba_lab0.c: 347:             jugador1=0;
+  1766  0735  01F9               	clrf	_jugador1
+  1767                           
+  1768                           ;wenas_prueba_lab0.c: 348:             break;
+  1769  0736  2F5F               	goto	l120
+  1770  0737                     l819:
+  1771  0737  0879               	movf	_jugador1,w
+  1772  0738  00F0               	movwf	??_cuenta_p1
+  1773  0739  01F1               	clrf	??_cuenta_p1+1
+  1774                           
+  1775                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  1776                           ; Switch size 1, requested type "simple"
+  1777                           ; Number of cases is 1, Range of values is 0 to 0
+  1778                           ; switch strategies available:
+  1779                           ; Name         Instructions Cycles
+  1780                           ; simple_byte            4     3 (average)
+  1781                           ; direct_byte           11     8 (fixed)
+  1782                           ; jumptable            260     6 (fixed)
+  1783                           ;	Chosen strategy is simple_byte
+  1784  073A  0871               	movf	??_cuenta_p1+1,w
+  1785  073B  3A00               	xorlw	0	; case 0
+  1786  073C  1903               	skipnz
+  1787  073D  2F3F               	goto	l957
+  1788  073E  2F5F               	goto	l120
+  1789  073F                     l957:
+  1790                           
+  1791                           ; Switch size 1, requested type "simple"
+  1792                           ; Number of cases is 10, Range of values is 1 to 18
+  1793                           ; switch strategies available:
+  1794                           ; Name         Instructions Cycles
+  1795                           ; simple_byte           31    16 (average)
+  1796                           ; direct_byte           65    11 (fixed)
+  1797                           ; jumptable            263     9 (fixed)
+  1798                           ;	Chosen strategy is simple_byte
+  1799  073F  0870               	movf	??_cuenta_p1,w
+  1800  0740  3A01               	xorlw	1	; case 1
+  1801  0741  1903               	skipnz
+  1802  0742  2ECF               	goto	l109
+  1803  0743  3A03               	xorlw	3	; case 2
+  1804  0744  1903               	skipnz
+  1805  0745  2EDA               	goto	l111
+  1806  0746  3A06               	xorlw	6	; case 4
+  1807  0747  1903               	skipnz
+  1808  0748  2EE5               	goto	l112
+  1809  0749  3A02               	xorlw	2	; case 6
+  1810  074A  1903               	skipnz
+  1811  074B  2EF0               	goto	l113
+  1812  074C  3A0E               	xorlw	14	; case 8
+  1813  074D  1903               	skipnz
+  1814  074E  2EFB               	goto	l114
+  1815  074F  3A02               	xorlw	2	; case 10
+  1816  0750  1903               	skipnz
+  1817  0751  2F06               	goto	l115
+  1818  0752  3A06               	xorlw	6	; case 12
+  1819  0753  1903               	skipnz
+  1820  0754  2F11               	goto	l116
+  1821  0755  3A02               	xorlw	2	; case 14
+  1822  0756  1903               	skipnz
+  1823  0757  2F1C               	goto	l117
+  1824  0758  3A1E               	xorlw	30	; case 16
+  1825  0759  1903               	skipnz
+  1826  075A  2F27               	goto	l795
+  1827  075B  3A02               	xorlw	2	; case 18
+  1828  075C  1903               	skipnz
+  1829  075D  2F35               	goto	l815
+  1830  075E  2F5F               	goto	l120
+  1831  075F                     l120:
+  1832  075F  0008               	return
+  1833  0760                     __end_of_cuenta_p1:
+  1834  007E                     btemp	set	126	;btemp
+  1835  007E                     wtemp0	set	126
+  1836                           
+  1837                           	psect	config
+  1838                           
+  1839                           ;Config register CONFIG1 @ 0x2007
+  1840                           ;	Oscillator Selection bits
+  1841                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
       +                          unction on RA7/OSC1/CLKIN
-  1304                           ;	Watchdog Timer Enable bit
-  1305                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
-  1306                           ;	Power-up Timer Enable bit
-  1307                           ;	PWRTE = OFF, PWRT disabled
-  1308                           ;	RE3/MCLR pin function select bit
-  1309                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
-  1310                           ;	Code Protection bit
-  1311                           ;	CP = OFF, Program memory code protection is disabled
-  1312                           ;	Data Code Protection bit
-  1313                           ;	CPD = OFF, Data memory code protection is disabled
-  1314                           ;	Brown Out Reset Selection bits
-  1315                           ;	BOREN = OFF, BOR disabled
-  1316                           ;	Internal External Switchover bit
-  1317                           ;	IESO = OFF, Internal/External Switchover mode is disabled
-  1318                           ;	Fail-Safe Clock Monitor Enabled bit
-  1319                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
-  1320                           ;	Low Voltage Programming Enable bit
-  1321                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
-  1322                           ;	In-Circuit Debugger Mode bit
-  1323                           ;	DEBUG = 0x1, unprogrammed default
-  1324  2007                     	org	8199
-  1325  2007  20D4               	dw	8404
-  1326                           
-  1327                           ;Config register CONFIG2 @ 0x2008
-  1328                           ;	Brown-out Reset Selection bit
-  1329                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
-  1330                           ;	Flash Program Memory Self Write Enable bits
-  1331                           ;	WRT = OFF, Write protection off
-  1332  2008                     	org	8200
-  1333  2008  3FFF               	dw	16383
+  1842                           ;	Watchdog Timer Enable bit
+  1843                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  1844                           ;	Power-up Timer Enable bit
+  1845                           ;	PWRTE = OFF, PWRT disabled
+  1846                           ;	RE3/MCLR pin function select bit
+  1847                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
+  1848                           ;	Code Protection bit
+  1849                           ;	CP = OFF, Program memory code protection is disabled
+  1850                           ;	Data Code Protection bit
+  1851                           ;	CPD = OFF, Data memory code protection is disabled
+  1852                           ;	Brown Out Reset Selection bits
+  1853                           ;	BOREN = OFF, BOR disabled
+  1854                           ;	Internal External Switchover bit
+  1855                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  1856                           ;	Fail-Safe Clock Monitor Enabled bit
+  1857                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  1858                           ;	Low Voltage Programming Enable bit
+  1859                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
+  1860                           ;	In-Circuit Debugger Mode bit
+  1861                           ;	DEBUG = 0x1, unprogrammed default
+  1862  2007                     	org	8199
+  1863  2007  20D4               	dw	8404
+  1864                           
+  1865                           ;Config register CONFIG2 @ 0x2008
+  1866                           ;	Brown-out Reset Selection bit
+  1867                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  1868                           ;	Flash Program Memory Self Write Enable bits
+  1869                           ;	WRT = OFF, Write protection off
+  1870  2008                     	org	8200
+  1871  2008  3FFF               	dw	16383
 
 Data Sizes:
     Strings     0
@@ -1365,7 +1909,7 @@ Data Sizes:
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMMON           14      9      14
+    COMMON           14      8      13
     BANK0            80      0       0
     BANK1            80      0       0
     BANK3            96      0       0
@@ -1379,15 +1923,7 @@ Critical Paths under _main in COMMON
 
     _main->_semaforo_inicio
 
-Critical Paths under _isr in COMMON
-
-    None.
-
 Critical Paths under _main in BANK0
-
-    None.
-
-Critical Paths under _isr in BANK0
 
     None.
 
@@ -1395,23 +1931,11 @@ Critical Paths under _main in BANK1
 
     None.
 
-Critical Paths under _isr in BANK1
-
-    None.
-
 Critical Paths under _main in BANK3
 
     None.
 
-Critical Paths under _isr in BANK3
-
-    None.
-
 Critical Paths under _main in BANK2
-
-    None.
-
-Critical Paths under _isr in BANK2
 
     None.
 
@@ -1420,8 +1944,10 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 2     2      0      45
-                                              7 COMMON     2     2      0
+ (0) _main                                                 3     3      0      45
+                                              5 COMMON     3     3      0
+                          _cuenta_p1
+                          _cuenta_p2
                    _semaforo_apagado
                     _semaforo_inicio
                               _setup
@@ -1429,28 +1955,27 @@ Call Graph Tables:
  (1) _setup                                                0     0      0       0
  ---------------------------------------------------------------------------------
  (1) _semaforo_inicio                                      5     5      0      45
-                                              2 COMMON     5     5      0
+                                              0 COMMON     5     5      0
  ---------------------------------------------------------------------------------
  (1) _semaforo_apagado                                     0     0      0       0
  ---------------------------------------------------------------------------------
- Estimated maximum stack depth 1
- ---------------------------------------------------------------------------------
- (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
- ---------------------------------------------------------------------------------
- (2) _isr                                                  2     2      0       0
+ (1) _cuenta_p2                                            2     2      0       0
                                               0 COMMON     2     2      0
  ---------------------------------------------------------------------------------
- Estimated maximum stack depth 2
+ (1) _cuenta_p1                                            2     2      0       0
+                                              0 COMMON     2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
  ---------------------------------------------------------------------------------
 
  Call Graph Graphs:
 
  _main (ROOT)
+   _cuenta_p1
+   _cuenta_p2
    _semaforo_apagado
    _semaforo_inicio
    _setup
-
- _isr (ROOT)
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
@@ -1458,13 +1983,13 @@ BITCOMMON            E      0       0       0        0.0%
 EEDATA             100      0       0       0        0.0%
 NULL                 0      0       0       0        0.0%
 CODE                 0      0       0       0        0.0%
-COMMON               E      9       E       1      100.0%
+COMMON               E      8       D       1       92.9%
 BITSFR0              0      0       0       1        0.0%
 SFR0                 0      0       0       1        0.0%
 BITSFR1              0      0       0       2        0.0%
 SFR1                 0      0       0       2        0.0%
 STACK                0      0       0       2        0.0%
-ABS                  0      0       E       3        0.0%
+ABS                  0      0       D       3        0.0%
 BITBANK0            50      0       0       4        0.0%
 BITSFR3              0      0       0       4        0.0%
 SFR3                 0      0       0       4        0.0%
@@ -1477,64 +2002,77 @@ BITBANK3            60      0       0       8        0.0%
 BANK3               60      0       0       9        0.0%
 BITBANK2            60      0       0      10        0.0%
 BANK2               60      0       0      11        0.0%
-DATA                 0      0       E      12        0.0%
+DATA                 0      0       D      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Sat Jul 10 01:03:59 2021
+Symbol Table                                                                                   Mon Jul 12 17:51:27 2021
 
-                       l81 0059                         l73 0025                         l82 0062  
-                       l83 006B                         l84 0074                         l76 0042  
-                       l85 007D                         l86 0086                         l95 0156  
-                       l87 008F                         l79 0050                         u10 012D  
-                       u11 012C                         u20 0023                         u21 0022  
-                       u30 0029                         u15 0129                         u31 0028  
-                       u40 002E                         u41 002D                         u50 0040  
-                       u51 003F                         u60 0046                         u61 0045  
-                       u70 004B                         u71 004A                         u87 00E4  
-                      l101 00D9                        l110 0163                        l103 00EC  
-                      l104 00F2                        l105 00F8                        l106 00FE  
-                      l107 012D                        l720 0136                        l800 0046  
-                      l730 014A                        l722 0137                        l810 009B  
-                      l802 004B                        l740 014F                        l732 014B  
-                      l724 0142                        l716 012E                        l820 00A0  
-                      l812 009C                        l804 0098                        l742 0150  
-                      l734 014C                        l726 0148                        l718 0135  
-                      l830 00C9                        l814 009D                        l806 0099  
-                      l752 00D4                        l744 0151                        l736 014D  
-                      l728 0149                        l840 00CE                        l832 00CA  
-                      l816 009E                        l808 009A                        l824 00A2  
-                      l770 0104                        l746 0152                        l738 014E  
-                      l842 00CF                        l834 00CB                        l818 009F  
-                      l826 00C7                        l780 015E                        l772 011A  
-                      l748 0153                        l836 00CC                        l828 00C8  
-                      l774 0120                        l758 00DE                        l838 00CD  
-                      l790 002E                        l782 0018                        l792 0034  
-                      l784 001D                        l946 00AA                        l794 0035  
-                      l786 0023                        l948 0109                        l796 003A  
-                      l788 0029                        l798 0040                        _isr 0157  
-                     ?_isr 0070                       i1l67 0157                       _main 0018  
-                     btemp 007E                       start 000C                      ??_isr 0070  
-         _semaforo_apagado 015E                      ?_main 0070                      _ANSEL 0188  
+                       l90 05E2                         l74 0771                         l75 0777  
+                       l96 05E8                         l98 05FB                         l99 0601  
+                       u10 063C                         u11 063B                         u20 076B  
+                       u21 076A                         u30 0775                         u15 0638  
+                       u31 0774                         u40 077B                         u41 077A  
+                       u50 0780                         u51 077F                         u60 0797  
+                       u61 0796                         u70 07AC                         u71 07AB  
+                       u80 07B1                         u81 07B0                         u90 07C5  
+                       u91 07C4                        l100 0607                        l101 060D  
+                      l102 063C                        l111 06DA                        l112 06E5  
+                      l120 075F                        l113 06F0                        l105 05B8  
+                      l114 06FB                        l130 0675                        l115 0706  
+                      l131 0680                        l116 0711                        l132 068B  
+                      l124 063E                        l117 071C                        l109 06CF  
+                      l133 0696                        l126 0649                        l127 0654  
+                      l135 06CD                        l128 065F                        l129 066A  
+                      l801 072C                        l811 0731                        l803 072D  
+                      l731 05C1                        l813 0732                        l805 072E  
+                      l741 05D5                        l733 05C2                        l815 0735  
+                      l807 072F                        l751 05DA                        l743 05D6  
+                      l735 05CD                        l727 05B9                        l809 0730  
+                      l833 06A5                        l825 063D                        l761 05DF  
+                      l753 05DB                        l745 05D7                        l737 05D3  
+                      l729 05C0                        l841 0760                        l819 0737  
+                      l827 06A0                        l771 05ED                        l755 05DC  
+                      l747 05D8                        l739 05D4                        l851 0780  
+                      l843 0765                        l829 06A3                        l765 05E3  
+                      l757 05DD                        l749 05D9                        l861 07A6  
+                      l853 078D                        l845 076B                        l839 05B3  
+                      l783 0613                        l759 05DE                        l871 07C5  
+                      l863 07AC                        l855 0791                        l847 0775  
+                      l793 06CE                        l953 0618                        l785 0629  
+                      l881 07E1                        l873 07CB                        l865 07B1  
+                      l857 0797                        l849 077B                        l795 0727  
+                      l955 06AD                        l787 062F                        l891 07F2  
+                      l875 07D0                        l867 07B5                        l859 07A4  
+                      l883 07E4                        l957 073F                        l797 0728  
+                      l877 07D6                        l869 07BA                        l885 07EB  
+                      l799 072B                        l887 07EC                        l879 07DC  
+                      l889 07F1                        u100 07CB                        u101 07CA  
+                      u110 07D6                        u111 07D5                        u120 07DC  
+                      u121 07DB                        u130 07EA                        u131 07E9  
+                      u147 0786                        u157 079D                        u167 05F3  
+                     _main 0760                       btemp 007E                       start 0000  
+         _semaforo_apagado 05B3                      ?_main 0070                      _ANSEL 0188  
                     _PORTA 0005                      _PORTB 0006                      _PORTC 0007  
                     _PORTD 0008                      _PORTE 0009                      _TRISA 0085  
                     _TRISC 0087                      _TRISD 0088                      _TRISE 0089  
-                    _setup 012E                      pclath 000A                      status 0003  
-                    wtemp0 007E            __initialization 000F               __end_of_main 00D4  
- __size_of_semaforo_inicio 005A                     ??_main 0077    semaforo_inicio@semaforo 0075  
-                   ?_setup 0070                     _ANSELH 0189                     saved_w 007E  
-  __end_of__initialization 0014             __pcstackCOMMON 0070              __end_of_setup 0157  
-           _OPTION_REGbits 0081          ??_semaforo_inicio 0072                    ??_setup 0072  
- __end_of_semaforo_apagado 0164                 __pmaintext 0018                 __pintentry 0004  
-                  __ptext1 012E                    __ptext2 00D4                    __ptext3 015E  
-                  __ptext4 0157               __size_of_isr 0007       end_of_initialization 0014  
-             _antirrebote1 007D               _antirrebote2 007C               _antirrebote3 007B  
-                _PORTBbits 0006                  _PORTCbits 0007                  _PORTDbits 0008  
-                _PORTEbits 0009                  _TRISBbits 0086            _semaforo_inicio 00D4  
-      start_initialization 000F                __end_of_isr 015E          ?_semaforo_apagado 0070  
-       ??_semaforo_apagado 0072                __pbssCOMMON 0079                  ___latbits 0002  
-  __end_of_semaforo_inicio 012E             __size_of_setup 0029          interrupt_function 0004  
-                 _PIE1bits 008C                   _PIR1bits 000C                   _WPUBbits 0095  
-         ?_semaforo_inicio 0070              __size_of_main 00BC                   _jugador1 007A  
-                 _jugador2 0079  __size_of_semaforo_apagado 0006                 _INTCONbits 000B  
-                 intlevel1 0000                 _OSCCONbits 008F  
+                    _setup 05B9                      status 0003                      wtemp0 007E  
+          __initialization 07F7               __end_of_main 07F7   __size_of_semaforo_inicio 005A  
+                   ??_main 0075    semaforo_inicio@semaforo 0073                     ?_setup 0070  
+                   _ANSELH 0189    __end_of__initialization 07FC             __pcstackCOMMON 0070  
+            __end_of_setup 05E3             _OPTION_REGbits 0081          ??_semaforo_inicio 0070  
+                  ??_setup 0070         __size_of_cuenta_p1 0092         __size_of_cuenta_p2 0091  
+ __end_of_semaforo_apagado 05B9                 __pmaintext 0760          __end_of_cuenta_p1 0760  
+        __end_of_cuenta_p2 06CE                    __ptext1 05B9                    __ptext2 05E3  
+                  __ptext3 05B3                    __ptext4 063D                    __ptext5 06CE  
+     end_of_initialization 07FC               _antirrebote1 007C               _antirrebote2 007B  
+             _antirrebote3 007A                  _PORTBbits 0006                  _PORTCbits 0007  
+                _PORTDbits 0008                  _PORTEbits 0009                  _TRISBbits 0086  
+          _semaforo_inicio 05E3        start_initialization 07F7          ?_semaforo_apagado 0070  
+       ??_semaforo_apagado 0070                __pbssCOMMON 0078                  ___latbits 0002  
+  __end_of_semaforo_inicio 063D                  _cuenta_p1 06CE                  _cuenta_p2 063D  
+           __size_of_setup 002A                   _PIE1bits 008C                   _PIR1bits 000C  
+               ?_cuenta_p1 0070                 ?_cuenta_p2 0070                   _WPUBbits 0095  
+         ?_semaforo_inicio 0070              __size_of_main 0097                   _jugador1 0079  
+                 _jugador2 0078  __size_of_semaforo_apagado 0006                ??_cuenta_p1 0070  
+              ??_cuenta_p2 0070                 _INTCONbits 000B                 _OSCCONbits 008F  
